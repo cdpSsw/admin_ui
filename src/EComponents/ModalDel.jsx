@@ -5,8 +5,8 @@ import Modal from './Modal';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const ModalDel = ({ modalDelID, modalDelTitle, modalDelContent, modalDelPath }) => {
-  console.log(modalDelContent)
-  console.log(modalDelPath)
+  // console.log(modalDelContent)
+  // console.log(modalDelPath)
   const handleDelete = async (id) => {
     try{
       const res = await Axios.delete(`${API_URL}/${modalDelPath}/${id}`, { withCredentials: true } );

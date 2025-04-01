@@ -2,7 +2,6 @@
 
 .a-ShowTiktok-container{
     width: 100%;
-    // background: saddlebrown;
     min-height: 100vh;
     height: auto;
     padding: 2vw 8vw;
@@ -71,22 +70,18 @@
         // background: red;
 
         .content-card{
-            width: 100%;
-            // background: var.$white;
-            border-radius: 16px;
             margin: 16px 0;
-            background: darkblue !important;
+            border: 1px solid var.$dim_white;
 
             .content-tiktok{
-                width: 100% !important;
-                // background: red;
-                padding: 32px;
-                margin: 16px;
+                // background-color: red;
+                height: 760px;
+                overflow: hidden;
             }
 
             .text-container{
-                padding: 16px;
-
+                padding: 16px 58px;
+                
                 .status{
                     cursor: pointer;
                     padding: 3px 6px;
@@ -116,7 +111,7 @@
             .edit-del-container{
                 display: flex;
                 justify-content: flex-end;
-                padding: 16px;
+                padding: 16px 48px;
                 
                 .btn{
                     transition: all .3s ease-out;

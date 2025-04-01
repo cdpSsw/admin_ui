@@ -41,102 +41,27 @@ const A_ShowTiktok = ({ id }) => {
         '<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@sripatum.spu/video/7368684229170957576" data-video-id="7368684229170957576" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@sripatum.spu" href="https://www.tiktok.com/@sripatum.spu?refer=embed">@sripatum.spu</a> <p>สาย IT ต้องห้ามพลาด‼️ คณะเทคโนฯ มัดรวมความรู้ จัดเต็มอัดแน่นมาให้น้องๆ แล้วว ถ้าเรื่อง IT มันใช่ มาสมัครเป็น DEK IT SPU ได้เลย #คณะเทคโนโลยีสารสนเทศ #มหาวิทยาลัยศรีปทุม #SPU #SripatumUniversity #Dek67 #TCAS67 #TGAT67 #TPAT67</p> <a target="_blank" title="♬ เสียงต้นฉบับ  - Sripatum University SPU" href="https://www.tiktok.com/music/เสียงต้นฉบับ-Sripatum-University-SPU-7368684324280896257?refer=embed">♬ เสียงต้นฉบับ  - Sripatum University SPU</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>',
       status: "Waiting",
     },
-    // {
-    //   topic: "Ex Topic #2 ",
-    //   description: "Description Support Topic",
-    //   embed:
-    //     '<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@it_spu/video/7381301983308795144" data-video-id="7381301983308795144" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@it_spu" href="https://www.tiktok.com/@it_spu?refer=embed">@it_spu</a> เปิดโลกไซเบอร์!!!! ชมรม Cyber Club SPU คณะเทคโนโลยีสารสนเทศ พาไปสัมผัสประสบการณ์จริง @RPCA Cyber Club ชมรมไซเบอร์โรงเรียนนายร้อยตำรวจ  โดยมี พี่ๆจากโรงเรียนนายร้อยตำรวจพาทัวร์และให้ความรู้ -ได้เรียนรู้เทคโนโลยีล้ำสมัยที่ใช้ในงานด้านไซเบอร์ -ได้พบปะพูดคุยกับผู้เชี่ยวชาญด้านไซเบอร์ -ได้เรียนรู้กลยุทธ์การป้องกันภัยไซเบอร์ ทั้งนี้ ยังได้สร้างเครือข่ายกับนักศึกษาและผู้เชี่ยวชาญด้านไซเบอร์อีกด้วย <a title="itspu" target="_blank" href="https://www.tiktok.com/tag/itspu?refer=embed">#ITSPU</a> <a title="คณะเทคโนโลยีสารสนเทศ" target="_blank" href="https://www.tiktok.com/tag/%E0%B8%84%E0%B8%93%E0%B8%B0%E0%B9%80%E0%B8%97%E0%B8%84%E0%B9%82%E0%B8%99%E0%B9%82%E0%B8%A5%E0%B8%A2%E0%B8%B5%E0%B8%AA%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%A8?refer=embed">#คณะเทคโนโลยีสารสนเทศ</a> <a title="มหาวิทยาลัยศรีปทุม" target="_blank" href="https://www.tiktok.com/tag/%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A5%E0%B8%B1%E0%B8%A2%E0%B8%A8%E0%B8%A3%E0%B8%B5%E0%B8%9B%E0%B8%97%E0%B8%B8%E0%B8%A1?refer=embed">#มหาวิทยาลัยศรีปทุม</a>  <a title="เรียนกับตัวจริงประสบการณ์จริง" target="_blank" href="https://www.tiktok.com/tag/%E0%B9%80%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%9A%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87?refer=embed">#เรียนกับตัวจริงประสบการณ์จริง</a> <a title="dekspu" target="_blank" href="https://www.tiktok.com/tag/dekspu?refer=embed">#dekspu</a> <a target="_blank" title="♬ Nasty x Naughty Girl - Jacobdior" href="https://www.tiktok.com/music/Nasty-x-Naughty-Girl-7367898047356865322?refer=embed">♬ Nasty x Naughty Girl - Jacobdior</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>',
-    //   status: "Waiting",
-    // },
+    {
+      topic: "Ex Topic #2 ",
+      description: "Description Support Topic",
+      embed:
+        '<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@it_spu/video/7381301983308795144" data-video-id="7381301983308795144" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@it_spu" href="https://www.tiktok.com/@it_spu?refer=embed">@it_spu</a> เปิดโลกไซเบอร์!!!! ชมรม Cyber Club SPU คณะเทคโนโลยีสารสนเทศ พาไปสัมผัสประสบการณ์จริง @RPCA Cyber Club ชมรมไซเบอร์โรงเรียนนายร้อยตำรวจ  โดยมี พี่ๆจากโรงเรียนนายร้อยตำรวจพาทัวร์และให้ความรู้ -ได้เรียนรู้เทคโนโลยีล้ำสมัยที่ใช้ในงานด้านไซเบอร์ -ได้พบปะพูดคุยกับผู้เชี่ยวชาญด้านไซเบอร์ -ได้เรียนรู้กลยุทธ์การป้องกันภัยไซเบอร์ ทั้งนี้ ยังได้สร้างเครือข่ายกับนักศึกษาและผู้เชี่ยวชาญด้านไซเบอร์อีกด้วย <a title="itspu" target="_blank" href="https://www.tiktok.com/tag/itspu?refer=embed">#ITSPU</a> <a title="คณะเทคโนโลยีสารสนเทศ" target="_blank" href="https://www.tiktok.com/tag/%E0%B8%84%E0%B8%93%E0%B8%B0%E0%B9%80%E0%B8%97%E0%B8%84%E0%B9%82%E0%B8%99%E0%B9%82%E0%B8%A5%E0%B8%A2%E0%B8%B5%E0%B8%AA%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%A8?refer=embed">#คณะเทคโนโลยีสารสนเทศ</a> <a title="มหาวิทยาลัยศรีปทุม" target="_blank" href="https://www.tiktok.com/tag/%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A5%E0%B8%B1%E0%B8%A2%E0%B8%A8%E0%B8%A3%E0%B8%B5%E0%B8%9B%E0%B8%97%E0%B8%B8%E0%B8%A1?refer=embed">#มหาวิทยาลัยศรีปทุม</a>  <a title="เรียนกับตัวจริงประสบการณ์จริง" target="_blank" href="https://www.tiktok.com/tag/%E0%B9%80%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%AA%E0%B8%9A%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%93%E0%B9%8C%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87?refer=embed">#เรียนกับตัวจริงประสบการณ์จริง</a> <a title="dekspu" target="_blank" href="https://www.tiktok.com/tag/dekspu?refer=embed">#dekspu</a> <a target="_blank" title="♬ Nasty x Naughty Girl - Jacobdior" href="https://www.tiktok.com/music/Nasty-x-Naughty-Girl-7367898047356865322?refer=embed">♬ Nasty x Naughty Girl - Jacobdior</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>',
+      status: "Waiting",
+    },
   ];
 
-  const [selectedShowTiktok, setselectedShowTiktok] = useState([]);
-  // console.log(showTiktok);
-  const handleShowTiktok = async () => {
-    try {
-      const res = await Axios.get(`${API_URL}/studentShowTiktok`, {
-        withCredentials: true,
-      });
-      if (res.status === 200) {
-        //  setShowTiktok(res.data);
-      } else {
-        alert(`Error to get *ShowTiktok, [Check/Log]`);
-        return;
-      }
-    } catch (err) {
-      alert(`Internal server ${err.message}`);
-    }
-  };
-
-  const handleselectedShowTiktok = async () => {
-    try {
-      const res = await Axios.get(`${API_URL}/selectedShowTiktok`, {
-        withCredentials: true,
-      });
-      if (res.status === 200) {
-        setselectedShowTiktok(res.data);
-        setNewSelect(res.data);
-      } else {
-        alert(`Error to get *Showcase, [Check/Log]`);
-        return;
-      }
-    } catch (err) {
-      alert(`Internal server ${err.message}`);
-    }
-  };
-
-  useEffect(() => {
-    document.title = "Showcase (Tiktok) | Admin";
-    handleShowTiktok();
-    handleselectedShowTiktok();
-  }, []);
-
-  // Post *Selected ShowTiktok
-  const [newSelect, setNewSelect] = useState([]);
-  // console.log(newSelect)
-
-  //  const handleNewSelect = (newItem) => {
-  //    const isAlreadySelected = newSelect.some(
-  //      (selected) => selected.id === newItem.id
-  //    );
-
-  //    if (isAlreadySelected) {
-  //      // ถ้าเลือกซ้ำให้ลบออกจาก newSelect
-  //      setNewSelect(newSelect.filter((selected) => selected.id !== newItem.id));
-  //    } else {
-  //      if (newSelect.length < 3) {
-  //        // ถ้ายังไม่ครบ 3 อัน ให้เพิ่มเข้าไป
-  //        setNewSelect([...newSelect, newItem]);
-  //      } else {
-  //        alert(`Select only 3 Showcase for 'Show'`);
-  //      }
-  //    }
-  //  };
-
-  const handleSaveNewSelect = async () => {
-    try {
-      const res = await Axios.post(
-        `${API_URL}/selectedShowTiktok`,
-        [newSelect],
-        { withCredentials: true }
-      );
-      if (res.status === 200) {
-        alert(`Save New "Selected Showcase" Sueccessful.`);
-        location.reload();
-      } else {
-        alert(`Save New "Selected Showcase" Failed.`);
-      }
-    } catch (err) {
-      alert(`Internal server error: ${err.message}`);
-    }
-  };
+  // Post *ShowTiktok
+  const [topic, setTopic] = useState("");
+  const [description, setDescription] = useState("");
+  const [embed, setEmbed] = useState("");
 
   // Put *Showcase
-  const [oldInfo, setOldInfo] = useState([]);
+  const [oldShowTiktok, setOldShowTiktok] = useState([]);
   const [newTopic, setNewTopic] = useState("");
+  const [newDescription, setNewDescription] = useState("");
   const [newEmbed, setNewEmbed] = useState("");
 
-  const handlePutShowcase = async () => {
+  const handleUpdateShowTiktok = async () => {
     try {
       const updatedTopic = newTopic.trim() ? newTopic : oldShowTiktok.topic;
       const updatedEmbed = newEmbed.trim() ? newEmbed : oldShowTiktok.embed;
@@ -169,13 +94,6 @@ const A_ShowTiktok = ({ id }) => {
 
   // Delete *Showcase
   const [delInfo, setDelInfo] = useState([]);
-
-  // HANDLE *CANCEL MODAL
-  const handleClosedModal = () => {
-    document.getElementById("topic").value = "";
-    document.getElementById("description").value = "";
-    document.getElementById("image").value = "";
-  };
 
   // Filter - Sub Menu [Status]
   const [filter, setFilter] = useState("All");
@@ -250,12 +168,10 @@ const A_ShowTiktok = ({ id }) => {
 
       <article className="content-container row m-0">
         {filteredShowTiktok.map((ShowTiktokItem, idx) => (
-          <section key={idx} className="col-sm-12 col-md-3">
-            <section
-              className="content-card"
-            >
+          <section key={idx} className="col-sm-12 col-md-4">
+            <section className="content-card">
               <section
-                className="content-tiktok"
+                className="content-tiktok mx-5"
                 key={idx}
                 dangerouslySetInnerHTML={{ __html: ShowTiktokItem.embed }}
               />
@@ -264,7 +180,9 @@ const A_ShowTiktok = ({ id }) => {
                 {ShowTiktokItem.status === "Approved" ? (
                   <span
                     className={`status
-                        ${ShowTiktokItem.status === "Approved" ? "Approved" : ""}
+                        ${
+                          ShowTiktokItem.status === "Approved" ? "Approved" : ""
+                        }
                       `}
                   >
                     <i class="bi bi-check-circle-fill"></i>
@@ -285,13 +203,13 @@ const A_ShowTiktok = ({ id }) => {
                 <h1 className="topic">{ShowTiktokItem.topic}</h1>
                 <p className="desc">{ShowTiktokItem.description}</p>
               </section>
-              
+
               <section className="edit-del-container">
                 <button
                   data-bs-toggle="modal"
                   data-bs-target="#modal-update"
                   className="btn btn-update"
-                  // onClick={() => setOldInfo(showcaseItem)}
+                  onClick={() => setOldShowTiktok(ShowTiktokItem)}
                 >
                   Update
                 </button>
@@ -299,59 +217,27 @@ const A_ShowTiktok = ({ id }) => {
                   data-bs-toggle="modal"
                   data-bs-target="#modal-delete"
                   className="btn btn-del"
-                  // onClick={() => setDelInfo(showcaseItem)}
+                  onClick={() => setDelInfo(ShowTiktokItem)}
                 >
                   Delete
                 </button>
               </section>
-
-              {/* <section onClick={() => handleNewSelect(ShowTiktokItem)}>
-                  <section className="content-text">
-                    <p className="student-id">
-                      ID - {ShowTiktokItem.studentID}
-                    </p>
-                    <h1 className="topic">{ShowTiktokItem.topic}</h1>
-                    <p className="desc">{ShowTiktokItem.description}</p>
-                  </section>
-
-                  <section className="content-btn">
-                    <button
-                      className="btn btn-edit"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modal-edit"
-                      onClick={(e) => [
-                        e.stopPropagation(),
-                        setOldShowTiktok(ShowTiktokItem),
-                      ]}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btn btn-delete"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modal-delete"
-                      onClick={(e) => [
-                        e.stopPropagation(),
-                        setDelInfo(ShowTiktokItem),
-                      ]}
-                    >
-                      Delete
-                    </button>
-                  </section>
-                </section> */}
             </section>
           </section>
         ))}
       </article>
 
-      {/* Modal - Add *Showcase */}
+      {/* Modal *Approve */}
+      <ModalApprove approveItem={approveItem} approvePath="studentShowTiktok" />
+
+      {/* Modal *Add New */}
       <Modal
         modalID="modal-add-new"
         modalHeaderStyle="d-none"
         modalFooterStyle="d-none"
         modalBodyContent={
           <form className="form">
-            <h1 className="topic">Showcase</h1>
+            <h1 className="topic">Edit *Showcase</h1>
 
             {/* Topic */}
             <div className="input-box">
@@ -360,10 +246,8 @@ const A_ShowTiktok = ({ id }) => {
               </label>
               <input
                 type="text"
-                name="topic"
-                id="topic"
                 className="form-control mb-3"
-                placeholder="ex. showcase #1"
+                placeholder="Ex. Topic #1"
                 onChange={(e) => setTopic(e.target.value)}
               />
             </div>
@@ -375,80 +259,36 @@ const A_ShowTiktok = ({ id }) => {
               </label>
               <textarea
                 type="text"
-                name="description"
-                id="description"
                 className="form-control mb-3"
-                placeholder="type description..."
+                placeholder="Type description..."
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
 
-            <section className="btn-container">
-              <button
-                type="button"
-                data-bs-dismiss="modal"
-                onClick={handleClosedModal}
-                className="btn btn-cancel"
-              >
-                Cancel
-              </button>
-
-              <button
-                type="button"
-                // onClick={handlePostShowcase}
-                className="btn btn-add"
-              >
-                Add New
-              </button>
-            </section>
-          </form>
-        }
-      />
-
-      {/* Modal - Update *Showcase */}
-      <Modal
-        modalID="modal-update"
-        modalHeaderStyle="d-none"
-        modalFooterStyle="d-none"
-        modalBodyContent={
-          <form className="form">
-            <h1 className="topic">Showcase</h1>
-
-            {/* Topic */}
+            {/* Embed */}
             <div className="input-box">
-              <label htmlFor="topic" className="mb-2">
-                * Topic
-              </label>
-              <input
-                type="text"
-                name="topic"
-                id="topic"
-                className="form-control mb-3"
-                placeholder={oldInfo.topic}
-                onChange={(e) => setNewTopic(e.target.value)}
-              />
-            </div>
-
-            {/* Description */}
-            <div className="input-box">
-              <label htmlFor="description" className="mb-2">
-                * Description
+              <label htmlFor="embed" className="mb-2">
+                * Embed
               </label>
               <textarea
                 type="text"
-                name="description"
-                id="description"
                 className="form-control mb-3"
-                placeholder={oldInfo.description}
-                onChange={(e) => setNewDescription(e.target.value)}
+                placeholder="Place embed..."
+                onChange={(e) => setEmbed(e.target.value)}
               ></textarea>
             </div>
+
+            <section
+              className="content-tiktok"
+              dangerouslySetInnerHTML={{
+                __html: newEmbed ? newEmbed : embed,
+              }}
+            />
 
             <section className="btn-container">
               <button
                 type="button"
                 data-bs-dismiss="modal"
-                onClick={handleClosedModal}
                 className="btn btn-cancel"
               >
                 Cancel
@@ -456,8 +296,8 @@ const A_ShowTiktok = ({ id }) => {
 
               <button
                 type="button"
-                onClick={handlePutShowcase}
                 className="btn btn-update"
+                onClick={handleUpdateShowTiktok}
               >
                 Update
               </button>
@@ -466,16 +306,125 @@ const A_ShowTiktok = ({ id }) => {
         }
       />
 
-      {/* Modal - Delete *Showcase */}
+      {/* Modal *Edit */}
+      <Modal
+        modalID="modal-update"
+        modalHeaderStyle="d-none"
+        modalFooterStyle="d-none"
+        modalBodyContent={
+          <form className="form">
+            <h1 className="topic">Edit *Showcase</h1>
+
+            {/* New *Topic */}
+            <div className="input-box">
+              <label htmlFor="topic" className="mb-2">
+                * New Topic
+              </label>
+              <input
+                type="text"
+                className="form-control mb-3"
+                placeholder={oldShowTiktok.topic}
+                onChange={(e) => setNewTopic(e.target.value)}
+              />
+            </div>
+
+            {/* New Description */}
+            <div className="input-box">
+              <label htmlFor="description" className="mb-2">
+                * Description
+              </label>
+              <textarea
+                type="text"
+                className="form-control mb-3"
+                placeholder={oldShowTiktok.description}
+                onChange={(e) => setNewDescription(e.target.value)}
+              ></textarea>
+            </div>
+
+            {/* New *Embed */}
+            <div className="input-box">
+              <label htmlFor="embed" className="mb-2">
+                * New Embed
+              </label>
+              <textarea
+                type="text"
+                className="form-control mb-3"
+                placeholder={oldShowTiktok.embed}
+                onChange={(e) => setNewEmbed(e.target.value)}
+              ></textarea>
+            </div>
+
+            <section
+              className="content-tiktok"
+              dangerouslySetInnerHTML={{
+                __html: newEmbed ? newEmbed : oldShowTiktok.embed,
+              }}
+            />
+
+            <section className="btn-container">
+              <button
+                type="button"
+                data-bs-dismiss="modal"
+                className="btn btn-cancel"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-update"
+                onClick={handleUpdateShowTiktok}
+              >
+                Update
+              </button>
+            </section>
+          </form>
+        }
+      />
+
+      {/* Modal *Delete */}
       <ModalDel
         modalDelID="modal-delete"
-        modalDelTitle="(Student) Showcase"
+        modalDelTitle="(Admin) Showcase"
         modalDelContent={delInfo}
-        modalDelPath="studentShowcase"
+        modalDelPath="studentShowTiktok"
       />
-      
-      {/* Modal *Approve */}
-      <ModalApprove approveItem={approveItem} approvePath="studentShowcase" />
+
+      {/* Modal *Save Select */}
+      <Modal
+        // modalID="modal-save-select"
+        modalHeaderStyle="d-none"
+        modalFooterStyle="d-none"
+        modalBodyContent={
+          <article className="modal-save-select">
+            <h2 className="topic">Save Select For Show</h2>
+
+            <p className="desc">
+              Are you going to save select this 'ShowTiktok' for show
+            </p>
+            {/* {newSelect.map((newSelect, idx) => (
+              <ul key={idx} className="select-list">
+                <li className="select">{newSelect.topic}</li>
+              </ul>
+            ))} */}
+
+            <section className="btn-container">
+              <button className="btn btn-no" data-bs-dismiss="modal">
+                No, Select New
+              </button>
+
+              {/* <button
+                className="btn btn-yes"
+                type="button"
+                disabled={newSelect.length !== 3}
+                onClick={handleSaveNewSelect}
+              >
+                Yes, Select it!
+              </button> */}
+            </section>
+          </article>
+        }
+      />
     </main>
   );
 };
