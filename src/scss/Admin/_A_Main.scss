@@ -55,19 +55,23 @@
     overflow-x: hidden;
     background: var.$bg-content;
   }
+
+  .mobile-view {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1555px) {
-  .a-main-container{
-    .desktop-view{
+  .a-main-container {
+    .desktop-view {
       width: 85px;
 
       .emblem-container > .emblem {
         height: 60px;
       }
 
-      .nav-container{
-        .link-name{
+      .nav-container {
+        .link-name {
           display: none;
         }
       }
@@ -77,5 +81,58 @@
   .select-comp-container {
     width: 100% !important;
     margin-left: 60px !important;
+  }
+}
+
+@media (max-width: 850px) {
+  .a-main-container {
+    .desktop-view {
+      display: none;
+    }
+
+    .select-comp-container {
+      width: 100% !important;
+      margin-left: 0% !important;
+    }
+
+    .mobile-view {
+      background: var.$white;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+      .emblem-container {
+        .emblem {
+          height: 60px;
+        }
+      }
+
+      .container {
+        .navbar-toggler {
+          &:focus{
+            box-shadow: none;
+          }
+        }
+        
+        .navbar-collapse {
+          .navbar-nav {
+            .nav-item {
+              margin-bottom: 16px;
+
+              .nav-link {
+                cursor: pointer;
+                transition: all 0.3s ease-out;
+
+                &:hover {
+                  background: var.$bg-active;
+                }
+
+                .nav-icon {
+                  margin-right: 8px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

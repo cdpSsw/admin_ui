@@ -233,3 +233,11 @@
         }
     }
 }
+
+/* สำหรับหน้าจอขนาดระหว่าง 768px ถึง 900px */
+@media (min-width: 768px) and (max-width: 1300px) {
+    .custom-col {
+      width: 50%; /* หรือ col-md-6 */
+    }
+  }
+  

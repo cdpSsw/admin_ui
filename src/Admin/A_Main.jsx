@@ -75,7 +75,7 @@ const A_Main = () => {
                   ${list.path === selectComp ? "active" : ""}
                 `}
                 onClick={() => setSelectComp(list.path)}
-              > 
+              >
                 <img src={list.icon} alt={list.name} />
                 <span className="link-name">{list.name}</span>
               </li>
@@ -97,6 +97,61 @@ const A_Main = () => {
             ))}
           </ul>
         </section>
+      </article>
+
+      <article className="mobile-view">
+        <nav className="navbar navbar-expand-lg p-0">
+          <div className="container">
+            <section className="emblem-container">
+              <img src={Emblem} alt="Emblem-Comen" className="emblem" />
+            </section>
+            <button
+              className="navbar-toggler ms-auto"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#n_bar"
+              aria-controls="navbarNavAltMarkup"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div className="collapse navbar-collapse" id="n_bar">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  {navListTop.map((list, idx) => (
+                    <li
+                      key={idx}
+                      className={`nav-link
+                  ${list.path === selectComp ? "active" : ""}
+                `}
+                      onClick={() => setSelectComp(list.path)}
+                    >
+                      <img src={list.icon} alt={list.name} className="nav-icon"/>
+                      <span className="link-name">{list.name}</span>
+                    </li>
+                  ))}
+                </li>
+                
+                <hr />
+                <li className="nav-item">
+                  {navListBottom.map((list, idx) => (
+                    <a
+                      key={idx}
+                      className={`nav-link
+                  ${list.path === selectComp ? "active" : ""}
+                `}
+                      onClick={() => setSelectComp(list.path)}
+                    >
+                      <img src={list.icon} alt={list.name} className="nav-icon" />
+                      <span className="link-name">{list.name}</span>
+                    </a>
+                  ))}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
       </article>
 
       <article className="select-comp-container col-md-10">

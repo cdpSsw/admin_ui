@@ -272,7 +272,7 @@ const A_ShowTiktok = ({ id }) => {
 
       <article className="content-container row m-0">
         {filteredShowTiktok.map((ShowTiktokItem, idx) => (
-          <section key={idx} className="col-sm-12 col-md-4">
+          <section key={idx} className="col-sm-12 col-md-4 custom-col">
             <section
                 className={`content-card
                 ${
