@@ -9,10 +9,9 @@ import ModalApprove from "../../EComponents/ModalApprove";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const A_ShowTiktok = ({ id }) => {
-  // Get *ShowTiktok
-  //  const [showTiktok, setShowTiktok] = useState([]);
   const showTiktok = [
     {
+      studentID: '64053441',
       topic: "Ex Topic #1 ",
       description: "Description Support Topic",
       embed:
@@ -20,6 +19,7 @@ const A_ShowTiktok = ({ id }) => {
       status: "Approved",
     },
     {
+      studentID: '64053441',
       topic: "Ex Topic #2 ",
       description: "Description Support Topic",
       embed:
@@ -27,6 +27,7 @@ const A_ShowTiktok = ({ id }) => {
       status: "Approved",
     },
     {
+      studentID: '64053441',
       topic: "Ex Topic #1 ",
       description: "Description Support Topic",
       embed:
@@ -34,6 +35,7 @@ const A_ShowTiktok = ({ id }) => {
       status: "Waiting",
     },
     {
+      studentID: '64053441',
       topic: "Ex Topic #2 ",
       description: "Description Support Topic",
       embed:
@@ -42,18 +44,39 @@ const A_ShowTiktok = ({ id }) => {
     },
   ];
 
-  // Post *ShowTiktok
-  const [studentID, setStudentID] = useState("")
-  const [topic, setTopic] = useState("");
-  const [description, setDescription] = useState("");
-  const [embed, setEmbed] = useState("");
+  // Get *ShowTiktok
+  const [showTiktoks, setShowTiktok] = useState([]);
+  const handleShowTiktok = async () => {
+    try {
+      const res = await Axios.get(`${API_URL}/studentShowTiktok`, {
+        withCredentials: true,
+      });
+      if (res.status === 200) {
+        setShowTiktok(res.data);
+      } else {
+        alert(`Error to get *ShowTiktok, [Check/Log]`);
+        return;
+      }
+    } catch (err) {
+      alert(`Internal server ${err.message}`);
+    }
+  };
 
+  useEffect(() => {
+    document.title = "Showcase (Tiktok) | Admin";
+    handleShowTiktok();
+  }, []);
+
+  // Post *ShowTiktok
+  const [studentID, setStudentID] = useState("");
+  const [topic, setTopic] = useState("");
+  const [embed, setEmbed] = useState("");
+  
   const handlePostshowTiktok = async () => {
     try {
       const formData = new FormData();
       formData.append("studentID", studentID);
       formData.append("topic", topic);
-      formData.append("description", description);
       formData.append("embed", embed);
 
       const res = await Axios.post(`${API_URL}/studentshowTiktok`, formData, {
@@ -73,10 +96,69 @@ const A_ShowTiktok = ({ id }) => {
     }
   };
 
+  // Post *Selected ShowTiktok
+  const [newSelect, setNewSelect] = useState([]);
+  // console.log(newSelect)
+
+  const handleselectedShowTiktok = async () => {
+    try {
+      const res = await Axios.get(`${API_URL}/selectedShowTiktok`, {
+        withCredentials: true,
+      });
+      if (res.status === 200) {
+        setNewSelect(res.data);
+      } else {
+        alert(`Error to get *Showcase, [Check/Log]`);
+        return;
+      }
+    } catch (err) {
+      alert(`Internal server ${err.message}`);
+    }
+  };
+
+  useEffect(() => {
+    handleselectedShowTiktok();
+  }, []);
+
+  const handleNewSelect = (newItem) => {
+    const isAlreadySelected = newSelect.some(
+      (selected) => selected.id === newItem.id
+    );
+
+    if (isAlreadySelected) {
+      // ถ้าเลือกซ้ำให้ลบออกจาก newSelect
+      setNewSelect(newSelect.filter((selected) => selected.id !== newItem.id));
+    } else {
+      if (newSelect.length < 3) {
+        // ถ้ายังไม่ครบ 3 อัน ให้เพิ่มเข้าไป
+        setNewSelect([...newSelect, newItem]);
+      } else {
+        alert(`Select only 3 Showcase for 'Show'`);
+      }
+    }
+  };
+
+  const handleSaveNewSelect = async () => {
+    try {
+      const res = await Axios.post(
+        `${API_URL}/selectedShowTiktok`,
+        [newSelect],
+        { withCredentials: true }
+      );
+      if (res.status === 200) {
+        alert(`Save New "Selected Showcase" Sueccessful.`);
+        location.reload();
+      } else {
+        alert(`Save New "Selected Showcase" Failed.`);
+      }
+    } catch (err) {
+      alert(`Internal server error: ${err.message}`);
+    }
+  };
+
   // Put *Showcase
   const [oldShowTiktok, setOldShowTiktok] = useState([]);
   const [newTopic, setNewTopic] = useState("");
-  const [newDescription, setNewDescription] = useState("");
   const [newEmbed, setNewEmbed] = useState("");
 
   const handleUpdateShowTiktok = async () => {
@@ -187,7 +269,17 @@ const A_ShowTiktok = ({ id }) => {
       <article className="content-container row m-0">
         {filteredShowTiktok.map((ShowTiktokItem, idx) => (
           <section key={idx} className="col-sm-12 col-md-4">
-            <section className="content-card">
+            <section
+                className={`content-card
+                ${
+                  newSelect.some(
+                    (selected) => selected.id === ShowTiktokItem.id
+                  )
+                    ? "selected"
+                    : ""
+                }  
+              `}
+              >
               <section
                 className="content-tiktok mx-5"
                 key={idx}
@@ -218,8 +310,10 @@ const A_ShowTiktok = ({ id }) => {
                     {ShowTiktokItem.status}
                   </span>
                 )}
-                <h1 className="topic">{ShowTiktokItem.topic}</h1>
-                <p className="desc">{ShowTiktokItem.description}</p>
+                <section onClick={() => handleNewSelect(ShowTiktokItem)}>
+                  <p className="id">Student ID: {ShowTiktokItem.studentID}</p>
+                  <h1 className="topic">{ShowTiktokItem.topic}</h1>
+                </section>
               </section>
 
               <section className="edit-del-container">
@@ -246,7 +340,11 @@ const A_ShowTiktok = ({ id }) => {
       </article>
 
       {/* Modal *Approve */}
-      <ModalApprove approveItem={approveItem} approvePath="studentShowTiktok" />
+      <ModalApprove
+        approveItem={approveItem}
+        approvePath="studentShowTiktok"
+        approveTitle="Showcase"
+      />
 
       {/* Modal *Add New */}
       <Modal
@@ -281,19 +379,6 @@ const A_ShowTiktok = ({ id }) => {
                 placeholder="Ex. Topic #1"
                 onChange={(e) => setTopic(e.target.value)}
               />
-            </div>
-
-            {/* Description */}
-            <div className="input-box">
-              <label htmlFor="description" className="mb-2">
-                * Description
-              </label>
-              <textarea
-                type="text"
-                className="form-control mb-3"
-                placeholder="Type description..."
-                onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
             </div>
 
             {/* Embed */}
@@ -359,19 +444,6 @@ const A_ShowTiktok = ({ id }) => {
               />
             </div>
 
-            {/* New Description */}
-            <div className="input-box">
-              <label htmlFor="description" className="mb-2">
-                * Description
-              </label>
-              <textarea
-                type="text"
-                className="form-control mb-3"
-                placeholder={oldShowTiktok.description}
-                onChange={(e) => setNewDescription(e.target.value)}
-              ></textarea>
-            </div>
-
             {/* New *Embed */}
             <div className="input-box">
               <label htmlFor="embed" className="mb-2">
@@ -421,9 +493,9 @@ const A_ShowTiktok = ({ id }) => {
         modalDelPath="studentShowTiktok"
       />
 
-      {/* Modal *Save Select */}
-      <Modal
-        // modalID="modal-save-select"
+     {/* Modal *Save Select */}
+     <Modal
+        modalID="modal-save-select"
         modalHeaderStyle="d-none"
         modalFooterStyle="d-none"
         modalBodyContent={
@@ -433,25 +505,25 @@ const A_ShowTiktok = ({ id }) => {
             <p className="desc">
               Are you going to save select this 'ShowTiktok' for show
             </p>
-            {/* {newSelect.map((newSelect, idx) => (
+            {newSelect.map((newSelect, idx) => (
               <ul key={idx} className="select-list">
                 <li className="select">{newSelect.topic}</li>
               </ul>
-            ))} */}
+            ))}
 
             <section className="btn-container">
               <button className="btn btn-no" data-bs-dismiss="modal">
                 No, Select New
               </button>
 
-              {/* <button
+              <button
                 className="btn btn-yes"
                 type="button"
                 disabled={newSelect.length !== 3}
                 onClick={handleSaveNewSelect}
               >
                 Yes, Select it!
-              </button> */}
+              </button>
             </section>
           </article>
         }

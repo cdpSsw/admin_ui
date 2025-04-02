@@ -7,6 +7,7 @@ import Home from "../DAssets/icons/icon-home.svg";
 import ShowFiles from "../DAssets/icons/icon-showcase-files.svg";
 import ShowTiktok from "../DAssets/icons/icon-showcase-tiktok.svg";
 import Tools from "../DAssets/icons/icon-tools.svg";
+import Members from "../DAssets/icons/icon-members.svg";
 import Settings from "../DAssets/icons/icon-settings.svg";
 import SignOut from "../DAssets/icons/icon-sign-out.svg";
 
@@ -14,6 +15,7 @@ import SignOut from "../DAssets/icons/icon-sign-out.svg";
 import A_ShowCase from "./pages/A_ShowCase";
 import A_ShowTiktok from "./pages/A_ShowTiktok";
 import A_Tools from "./pages/A_Tools";
+import A_Members from "./pages/A_Members";
 
 const A_Main = () => {
   const [selectComp, setSelectComp] = useState("Admin-ShowCase");
@@ -37,6 +39,11 @@ const A_Main = () => {
       icon: Tools,
       name: "Tools",
       path: "Admin-Tools",
+    },
+    {
+      icon: Members,
+      name: "Members",
+      path: "Admin-Members",
     },
   ];
   const navListBottom = [
@@ -96,6 +103,7 @@ const A_Main = () => {
         {selectComp === "Admin-ShowFiles" && <A_ShowCase />}
         {selectComp === "Admin-ShowTiktok" && <A_ShowTiktok />}
         {selectComp === "Admin-Tools" && <A_Tools />}
+        {selectComp === "Admin-Members" && <A_Members />}
       </article>
     </main>
   );

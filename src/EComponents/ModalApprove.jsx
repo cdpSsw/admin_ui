@@ -4,7 +4,7 @@ import Axios from "axios";
 import Modal from "./Modal";
 const API_URL = import.meta.env.VITE_API_URL;
 
-const ModalApprove = ({ approveItem, approvePath }) => {
+const ModalApprove = ({ approveItem, approvePath, approveTitle }) => {
   // console.log(approveItem)
   const handleApprove = async ({ id }) => {
     try {
@@ -36,7 +36,7 @@ const ModalApprove = ({ approveItem, approvePath }) => {
             <i className="bi bi-check-circle-fill"></i>
           </section>
           <h1 className="topic">
-            Approve <strong>Showcase</strong>
+            Approve <strong>{approveTitle}</strong>
           </h1>
           <p className="desc mb-1">
             You're going to approve <span>{approveItem.topic}</span>

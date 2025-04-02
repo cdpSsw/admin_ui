@@ -64,10 +64,14 @@ const ModalDel = ({ modalDelID, modalDelTitle, modalDelContent, modalDelPath }) 
               <h5><span className="delete-topic">"{modalDelContent.topic}</span>", Are you sure ?</h5>
             
             ) : modalDelTitle === '(Admin) Member' ? (
-              <h5><span className="delete-topic">"[{modalDelContent.studentID}] {modalDelContent.fname} {modalDelContent.lname}</span>", Are you sure ?</h5>
+              <h5><span className="delete-topic">"[{modalDelContent.studentID}] {modalDelContent.fname} {modalDelContent.lname}"</span>", Are you sure ?</h5>
             
             ) : modalDelTitle === '(Admin) tools' ? (
               <h5><span className="delete-topic">{modalDelContent.name}</span>", Are you sure ?</h5>
+              
+            
+            ) : modalDelTitle === '(Admin) Members' ? (
+              <h5><span className="delete-topic">"[{modalDelContent.studentID}] {modalDelContent.fname} {modalDelContent.lname}"</span>", Are you sure ?</h5>
               
             ) : null }
           </span>

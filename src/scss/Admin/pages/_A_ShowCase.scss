@@ -2,7 +2,7 @@
 
 .a-showcase-container{
     width: 100%;
-    // background: saddlebrown;
+    min-height: 100vh;
     height: auto;
     padding: 2vw 8vw;
 
@@ -70,6 +70,7 @@
         // background: red;
 
         .content-card{
+            cursor: pointer;
             background: var.$white;
             border-radius: 16px;
             margin: 16px 0;
@@ -100,12 +101,18 @@
                 }
 
                 .status.Waiting{
-                    color: var.$btn_wating1;
-                    background: var.$btn_wating2;
-                    border: 1px solid var.$btn_wating2;
+                    color: var.$btn_waiting1;
+                    background: var.$btn_waiting2;
+                    border: 1px solid var.$btn_waiting2;
                 }
 
-                .topic{ font-size: 24px; margin-top: 8px; }
+                .id{ 
+                    margin: 0;
+                    margin-top: 8px;
+                    font-size: 14px;
+                    color: var.$dim_white;
+                }
+                .topic{ font-size: 24px; }
                 .desc{
                     color: var.$light-grey;
                 }
@@ -147,6 +154,14 @@
                     }
                 }
             
+            }
+        }
+
+        .content-card.selected{
+            background: var.$topic-headers;
+
+            .text-container{
+                .topic{ color: var.$white; }
             }
         }
     }

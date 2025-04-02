@@ -19,36 +19,42 @@ import sc3 from "../../DAssets/exposter/sc3.png";
 const A_ShowCase = ({ id }) => {
   const showcase = [
     {
+      studentID: '64053441',
       img: ev1,
       topic: "Main Topic #1",
       description: "Description Support Topic",
       status: "Approved",
     },
     {
+      studentID: '64053441',
       img: ev2,
       topic: "Main Topic #2",
       description: "Description Support Topic",
       status: "Approved",
     },
     {
+      studentID: '64053441',
       img: ev3,
       topic: "Main Topic #3",
       description: "Description Support Topic",
       status: "Approved",
     },
     {
+      studentID: '64053441',
       img: sc1,
       topic: "Main Topic #1",
       description: "Description Support Topic",
       status: "Waiting",
     },
     {
+      studentID: '64053441',
       img: sc2,
       topic: "Main Topic #1",
       description: "Description Support Topic",
       status: "Waiting",
     },
     {
+      studentID: '64053441',
       img: sc3,
       topic: "Main Topic #1",
       description: "Description Support Topic",
@@ -60,7 +66,7 @@ const A_ShowCase = ({ id }) => {
   const [selectedImg, setSelectedImg] = useState(null);
 
   // GET ALL *SHOWCASE
-  // const [showcase, setShowcase] = useState([]);
+  const [showcases, setShowcase] = useState([]);
   const handleGetShowcase = async () => {
     try {
       const res = await Axios.get(`${API_URL}/studentShowcase`, {
@@ -68,7 +74,7 @@ const A_ShowCase = ({ id }) => {
       });
 
       if (res.status === 200) {
-        // setShowcase(res.data);
+        setShowcase(res.data);
       } else {
         alert(`Error to get Showcase, for this id: ${id}`);
       }
@@ -76,8 +82,14 @@ const A_ShowCase = ({ id }) => {
       alert(`Internal server ${err}`);
     }
   };
+  
+  useEffect(() => {
+    document.title = "Showcase (Files) | Admin";
+    handleGetShowcase();
+  }, []);
 
   // POST NEW *SHOWCASE
+  const [studentID, setStudentID] = useState("");
   const [topic, setTopic] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState();
@@ -86,7 +98,7 @@ const A_ShowCase = ({ id }) => {
   const handlePostShowcase = async () => {
     try {
       const formData = new FormData();
-      formData.append("studentID", id);
+      formData.append("studentID", studentID);
       formData.append("topic", topic);
       formData.append("description", description);
       formData.append("image", image);
@@ -112,6 +124,65 @@ const A_ShowCase = ({ id }) => {
   const handleImg = (e) => {
     setImage(e);
     setPreviewImage(URL.createObjectURL(e));
+  };
+
+  // Post *Selected Showcase
+  const [newSelect, setNewSelect] = useState([]);
+  // console.log(newSelect)
+
+   // GET SELECTED *SHOWCASE
+   const handleGetSelectedShowcase = async () => {
+     try {
+       const res = await Axios.get(`${API_URL}/selectedShowcase`, {
+         withCredentials: true,
+       });
+ 
+       if (res.status === 200) {
+        setNewSelect(res.data);
+       } else {
+         alert(`Error to get Showcase, for this id: ${id}`);
+       }
+     } catch (err) {
+       alert(`Internal server ${err}`);
+     }
+   };
+   
+   useEffect(() => {
+    handleGetSelectedShowcase();
+   }, []);
+
+  const handleNewSelect = (newItem) => {
+    const isAlreadySelected = newSelect.some(
+      (selected) => selected.id === newItem.id
+    );
+
+    if (isAlreadySelected) {
+      // ถ้าเลือกซ้ำให้ลบออกจาก newSelect
+      setNewSelect(newSelect.filter((selected) => selected.id !== newItem.id));
+    } else {
+      if (newSelect.length < 3) {
+        // ถ้ายังไม่ครบ 3 อัน ให้เพิ่มเข้าไป
+        setNewSelect([...newSelect, newItem]);
+      } else {
+        alert(`Select only 3 Showcase for 'Show'`);
+      }
+    }
+  };
+
+  const handleSaveNewSelect = async () => {
+    try {
+      const res = await Axios.post(`${API_URL}/selectedShowcase`, [newSelect], {
+        withCredentials: true,
+      });
+      if (res.status === 200) {
+        alert(`Save New "Selected Showcase" Sueccessful.`);
+        location.reload();
+      } else {
+        alert(`Save New "Selected Showcase" Failed.`);
+      }
+    } catch (err) {
+      alert(`Internal server error: ${err.message}`);
+    }
   };
 
   // PUT *SHOWCASE
@@ -175,11 +246,6 @@ const A_ShowCase = ({ id }) => {
     document.getElementById("image").value = "";
   };
 
-  useEffect(() => {
-    document.title = "Showcase (Files) | Admin";
-    handleGetShowcase();
-  }, []);
-
   // Filter - Sub Menu [Status]
   const [filter, setFilter] = useState("All");
   const filteredShowcase = showcase.filter(
@@ -242,11 +308,21 @@ const A_ShowCase = ({ id }) => {
       <article className="content-container row m-0">
         {filteredShowcase.map((showcaseItem, idx) => (
           <section key={idx} className="col-sm-6 col-md-3">
-            <section className="content-card">
+             <section
+                className={`content-card
+                ${
+                  newSelect.some((selected) => selected.id === showcaseItem.id)
+                    ? "selected"
+                    : ""
+                }  
+              `}
+              >
               <img
                 src={showcaseItem.img}
+                // src={`${API_URL}/images/stu_showcase/${showcaseItem.image}`}
                 alt={showcaseItem.topic}
                 className="content-img"
+                // onClick={() => setSelectedImg(showcaseItem.image)}
                 onClick={() => setSelectedImg(showcaseItem.img)}
               />
 
@@ -257,7 +333,7 @@ const A_ShowCase = ({ id }) => {
                         ${showcaseItem.status === "Approved" ? "Approved" : ""}
                       `}
                   >
-                    <i class="bi bi-check-circle-fill"></i>
+                    <i className="bi bi-check-circle-fill"></i>
                     {showcaseItem.status}
                   </span>
                 ) : (
@@ -265,15 +341,19 @@ const A_ShowCase = ({ id }) => {
                     className={`status
                         ${showcaseItem.status === "Waiting" ? "Waiting" : ""}
                       `}
-                    data-bs-toggle='modal'
+                    data-bs-toggle="modal"
                     data-bs-target="#modal-approve"
+                    onClick={() => setApproveItem(showcaseItem)}
                   >
                     <i className="bi bi-clock-fill"></i>
                     {showcaseItem.status}
                   </span>
                 )}
-                <h1 className="topic">{showcaseItem.topic}</h1>
-                <p className="desc">{showcaseItem.description}</p>
+                <section onClick={() => handleNewSelect(showcaseItem)}>
+                  <p className="id">Student ID: {showcaseItem.studentID}</p>
+                  <h1 className="topic">{showcaseItem.topic}</h1>
+                  <p className="desc">{showcaseItem.description}</p>
+                </section>
               </section>
 
               <section className="edit-del-container">
@@ -307,6 +387,21 @@ const A_ShowCase = ({ id }) => {
         modalBodyContent={
           <form className="form">
             <h1 className="topic">Showcase</h1>
+
+            {/* Student ID */}
+            <div className="input-box">
+              <label htmlFor="studentID" className="mb-2">
+                * Student ID
+              </label>
+              <input
+                type="text"
+                name="studentID"
+                id="studentID"
+                className="form-control mb-3"
+                placeholder="ex. 699999999"
+                onChange={(e) => setStudentID(e.target.value)}
+              />
+            </div>
 
             {/* Topic */}
             <div className="input-box">
@@ -368,7 +463,7 @@ const A_ShowCase = ({ id }) => {
 
               <button
                 type="button"
-                // onClick={handlePostShowcase}
+                onClick={handlePostShowcase}
                 className="btn btn-add"
               >
                 Add New
@@ -444,10 +539,10 @@ const A_ShowCase = ({ id }) => {
                 />
               ) : (
                 <img
-                  className="preview-image"
-                  // src={`${API_URL}/images/stu_showcase/${oldInfo.image}`}
-                  src={oldInfo.img}
+                  // src={oldInfo.img}
+                  src={`${API_URL}/images/stu_showcase/${oldInfo.image}`}
                   alt={oldInfo.topic}
+                  className="preview-image"
                 />
               )
             ) : null}
@@ -481,9 +576,49 @@ const A_ShowCase = ({ id }) => {
         modalDelContent={delInfo}
         modalDelPath="studentShowcase"
       />
-      
+
       {/* Modal *Approve */}
-      <ModalApprove approveItem={approveItem} approvePath="studentShowcase" />
+      <ModalApprove
+        approveItem={approveItem}
+        approvePath="studentShowcase"
+        approveTitle="Showcase"
+      />
+
+      {/* Modal *Save Select */}
+      <Modal
+        modalID="modal-save-select"
+        modalHeaderStyle="d-none"
+        modalFooterStyle="d-none"
+        modalBodyContent={
+          <article className="modal-save-select">
+            <h2 className="topic">Save Select For Show</h2>
+
+            <p className="desc">
+              Are you going to save select this 'Showcase' for show
+            </p>
+            {newSelect.map((newSelect, idx) => (
+              <ul key={idx} className="select-list">
+                <li className="select">{newSelect.topic}</li>
+              </ul>
+            ))}
+
+            <section className="btn-container">
+              <button className="btn btn-no" data-bs-dismiss="modal">
+                No, Select New
+              </button>
+
+              <button
+                className="btn btn-yes"
+                type="button"
+                disabled={newSelect.length !== 3}
+                onClick={handleSaveNewSelect}
+              >
+                Yes, Select it!
+              </button>
+            </section>
+          </article>
+        }
+      />
 
       {selectedImg && (
         <div className="overlay" onClick={() => setSelectedImg(null)}>
@@ -491,7 +626,12 @@ const A_ShowCase = ({ id }) => {
             <span className="close-btn" onClick={() => setSelectedImg(null)}>
               &times;
             </span>
-            <img src={selectedImg} alt="Preview" className="original-img" />
+            <img
+              src={selectedImg}
+              // src={`${API_URL}/images/stu_showcase/${selectedImg}`}
+              alt="Preview"
+              className="original-img"
+            />
           </div>
         </div>
       )}

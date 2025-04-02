@@ -69,9 +69,10 @@
     .content-container{
         
         .content-card{
+            cursor: pointer;
             margin: 16px 0;
+            border-radius: 16px;
             border: 1px solid var.$dim_white;
-            // background: red;
             overflow: hidden;
 
             .content-tiktok{
@@ -82,7 +83,7 @@
             }
 
             .text-container{
-                padding: 16px 58px;
+                padding: 16px 38px;
                 
                 .status{
                     cursor: pointer;
@@ -99,11 +100,17 @@
                 }
 
                 .status.Waiting{
-                    color: var.$btn_wating1;
-                    background: var.$btn_wating2;
-                    border: 1px solid var.$btn_wating2;
+                    color: var.$btn_waiting1;
+                    background: var.$btn_waiting2;
+                    border: 1px solid var.$btn_waiting2;
                 }
 
+                .id{ 
+                    margin: 0;
+                    margin-top: 8px;
+                    font-size: 14px;
+                    color: var.$dim_white;
+                }
                 .topic{ font-size: 24px; margin-top: 8px; }
                 .desc{
                     color: var.$light-grey;
@@ -146,6 +153,14 @@
                     }
                 }
             
+            }
+        }
+
+        .content-card.selected{
+            background: var.$topic-headers;
+
+            .text-container{
+                .topic{ color: var.$white; }
             }
         }
     }
