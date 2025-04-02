@@ -19,6 +19,7 @@ import sc3 from "../../DAssets/exposter/sc3.png";
 const A_ShowCase = ({ id }) => {
   const showcase = [
     {
+      id: 1,
       studentID: '64053441',
       img: ev1,
       topic: "Main Topic #1",
@@ -26,6 +27,7 @@ const A_ShowCase = ({ id }) => {
       status: "Approved",
     },
     {
+      id: 2,
       studentID: '64053441',
       img: ev2,
       topic: "Main Topic #2",
@@ -33,6 +35,7 @@ const A_ShowCase = ({ id }) => {
       status: "Approved",
     },
     {
+      id: 3,
       studentID: '64053441',
       img: ev3,
       topic: "Main Topic #3",
@@ -40,6 +43,7 @@ const A_ShowCase = ({ id }) => {
       status: "Approved",
     },
     {
+      id: 4,
       studentID: '64053441',
       img: sc1,
       topic: "Main Topic #1",
@@ -47,6 +51,7 @@ const A_ShowCase = ({ id }) => {
       status: "Waiting",
     },
     {
+      id: 5,
       studentID: '64053441',
       img: sc2,
       topic: "Main Topic #1",
@@ -54,6 +59,7 @@ const A_ShowCase = ({ id }) => {
       status: "Waiting",
     },
     {
+      id: 6,
       studentID: '64053441',
       img: sc3,
       topic: "Main Topic #1",
@@ -128,7 +134,7 @@ const A_ShowCase = ({ id }) => {
 
   // Post *Selected Showcase
   const [newSelect, setNewSelect] = useState([]);
-  // console.log(newSelect)
+  console.log(newSelect)
 
    // GET SELECTED *SHOWCASE
    const handleGetSelectedShowcase = async () => {
@@ -138,7 +144,7 @@ const A_ShowCase = ({ id }) => {
        });
  
        if (res.status === 200) {
-        setNewSelect(res.data);
+        // setNewSelect(res.data);
        } else {
          alert(`Error to get Showcase, for this id: ${id}`);
        }
