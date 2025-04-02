@@ -13,6 +13,7 @@ import SignOut from "../DAssets/icons/icon-sign-out.svg";
 // Components
 import A_ShowCase from "./pages/A_ShowCase";
 import A_ShowTiktok from "./pages/A_ShowTiktok";
+import A_Tools from "./pages/A_Tools";
 
 const A_Main = () => {
   const [selectComp, setSelectComp] = useState("Admin-ShowCase");
@@ -94,6 +95,7 @@ const A_Main = () => {
       <article className="select-comp-container col-md-10">
         {selectComp === "Admin-ShowFiles" && <A_ShowCase />}
         {selectComp === "Admin-ShowTiktok" && <A_ShowTiktok />}
+        {selectComp === "Admin-Tools" && <A_Tools />}
       </article>
     </main>
   );

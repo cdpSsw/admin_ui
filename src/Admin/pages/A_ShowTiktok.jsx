@@ -8,14 +8,6 @@ import ModalApprove from "../../EComponents/ModalApprove";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-// exposter
-import ev1 from "../../DAssets/exposter/ev1.png";
-import ev2 from "../../DAssets/exposter/ev2.png";
-import ev3 from "../../DAssets/exposter/ev3.png";
-import sc1 from "../../DAssets/exposter/sc1.png";
-import sc2 from "../../DAssets/exposter/sc2.png";
-import sc3 from "../../DAssets/exposter/sc3.png";
-
 const A_ShowTiktok = ({ id }) => {
   // Get *ShowTiktok
   //  const [showTiktok, setShowTiktok] = useState([]);
@@ -51,9 +43,35 @@ const A_ShowTiktok = ({ id }) => {
   ];
 
   // Post *ShowTiktok
+  const [studentID, setStudentID] = useState("")
   const [topic, setTopic] = useState("");
   const [description, setDescription] = useState("");
   const [embed, setEmbed] = useState("");
+
+  const handlePostshowTiktok = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("studentID", studentID);
+      formData.append("topic", topic);
+      formData.append("description", description);
+      formData.append("embed", embed);
+
+      const res = await Axios.post(`${API_URL}/studentshowTiktok`, formData, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+
+      if (res.status === 200) {
+        alert(`Add New showTiktok Succesful.`);
+        location.reload();
+      } else {
+        alert(`Error to get showTiktok, for this id: ${id}`);
+        location.reload();
+      }
+    } catch {
+      alert(`Internal server ${err}`);
+    }
+  };
 
   // Put *Showcase
   const [oldShowTiktok, setOldShowTiktok] = useState([]);
@@ -237,7 +255,20 @@ const A_ShowTiktok = ({ id }) => {
         modalFooterStyle="d-none"
         modalBodyContent={
           <form className="form">
-            <h1 className="topic">Edit *Showcase</h1>
+            <h1 className="topic">Showcase</h1>
+
+            {/* Student ID */}
+            <div className="input-box">
+              <label htmlFor="studentID" className="mb-2">
+                * Student ID
+              </label>
+              <input
+                type="text"
+                className="form-control mb-3"
+                placeholder="Ex. 69999999"
+                onChange={(e) => setStudentID(e.target.value)}
+              />
+            </div>
 
             {/* Topic */}
             <div className="input-box">
@@ -296,10 +327,10 @@ const A_ShowTiktok = ({ id }) => {
 
               <button
                 type="button"
-                className="btn btn-update"
-                onClick={handleUpdateShowTiktok}
+                className="btn btn-add"
+                onClick={handlePostshowTiktok}
               >
-                Update
+                Add New
               </button>
             </section>
           </form>

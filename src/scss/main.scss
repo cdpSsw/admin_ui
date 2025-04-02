@@ -2,6 +2,14 @@
 @use './Admin/A_Main';
 @use './Admin/pages/A_ShowCase';
 @use './Admin/pages/A_ShowTikok';
+@use './Admin/pages/A_Tools';
+
+// Client
+@use './Client/Homepages';
+@use './Client/User_Main';
+@use './Client/components/Nav';
+@use './Client/components/PagesHeader';
+@use './Client/homeComp/Header';
 
 // EComponents
 @use './EComponents/ModalApprove';

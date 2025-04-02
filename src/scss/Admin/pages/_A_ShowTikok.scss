@@ -67,15 +67,17 @@
     }
 
     .content-container{
-        // background: red;
-
+        
         .content-card{
             margin: 16px 0;
             border: 1px solid var.$dim_white;
+            // background: red;
+            overflow: hidden;
 
             .content-tiktok{
-                // background-color: red;
+                width: 325px;
                 height: 760px;
+                margin:  0 35px !important;
                 overflow: hidden;
             }
 
