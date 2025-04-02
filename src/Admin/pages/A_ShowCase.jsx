@@ -368,7 +368,7 @@ const A_ShowCase = ({ id }) => {
 
               <button
                 type="button"
-                onClick={handlePostShowcase}
+                // onClick={handlePostShowcase}
                 className="btn btn-add"
               >
                 Add New

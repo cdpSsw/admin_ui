@@ -140,6 +140,9 @@ const A_Tools = ({ id }) => {
     setNewPreviewRight(URL.createObjectURL(e));
   };
 
+// DELETE *SHOWCASE
+const [delInfo, setDelInfo] = useState([]);
+
   // Overlay
   const [selectedimg1, setSelectedimg1] = useState(null);
 
@@ -225,7 +228,7 @@ const A_Tools = ({ id }) => {
                     data-bs-toggle="modal"
                     data-bs-target="#modal-delete"
                     className="btn btn-del"
-                    // onClick={() => setDelInfo(toolsItem)}
+                    onClick={() => setDelInfo(toolsItem)}
                   >
                     Delete
                   </button>
@@ -510,24 +513,11 @@ const A_Tools = ({ id }) => {
       {/* Modal - Delete *tools */}
       <ModalDel
         modalDelID="modal-delete"
-        modalDelTitle="(Student) tools"
-        // modalDelContent={delInfo}
-        modalDelPath="studenttools"
+        modalDelTitle="(Admin) tools"
+        modalDelContent={delInfo}
+        modalDelPath="tools"
       />
 
-      {/* Modal *Approve */}
-      {/* <ModalApprove approveItem={approveItem} approvePath="studenttools" /> */}
-
-      {/* {selectedimg1 && (
-        <div className="overlay" onClick={() => setSelectedimg1(null)}>
-          <div className="overlay-content">
-            <span className="close-btn" onClick={() => setSelectedimg1(null)}>
-              &times;
-            </span>
-            <img1 src={selectedimg1} alt="Preview" className="original-img1" />
-          </div>
-        </div>
-      )} */}
     </main>
   );
 };
