@@ -592,10 +592,10 @@ const A_ShowCase = ({ id }) => {
         modalBodyContent={
           <article className="modal-save-select">
             <h2 className="topic">Save Select For Show</h2>
-
             <p className="desc">
               Are you going to save select this 'Showcase' for show
             </p>
+            
             {newSelect.map((newSelect, idx) => (
               <ul key={idx} className="select-list">
                 <li className="select">{newSelect.topic}</li>

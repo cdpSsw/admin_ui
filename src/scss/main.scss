@@ -15,6 +15,7 @@
 // EComponents
 @use './EComponents/ModalApprove';
 @use './EComponents/ModalDel';
+@use './EComponents/ModalSaveSelect';
 
 .overlay {
     position: fixed;

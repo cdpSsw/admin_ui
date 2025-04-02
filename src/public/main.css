@@ -1329,6 +1329,62 @@
   box-shadow: 0 0 8px #BF2C38;
 }
 
+.modal-save-select {
+  padding: 16px;
+  text-align: center;
+}
+.modal-save-select .topic {
+  font-weight: 700;
+  color: #13B35D;
+}
+.modal-save-select .select-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  list-style-position: inside;
+  text-align: center;
+  padding: 10px;
+  width: fit-content;
+  margin: 0 auto;
+  color: #13B35D;
+}
+.modal-save-select .select-list .select {
+  text-align: center;
+  width: 100%;
+}
+.modal-save-select .btn-container {
+  margin-top: 16px;
+}
+.modal-save-select .btn-container .btn {
+  color: #BF2C38;
+  background: none;
+  border: 1px solid #FAE2E4;
+  border-radius: 32px;
+  margin: 0 4px;
+  transition: all 0.3s ease-out;
+}
+.modal-save-select .btn-container .btn-yes {
+  color: #13B35D;
+  background: #E5F9EE;
+  border: 1px solid #E5F9EE;
+}
+.modal-save-select .btn-container .btn-yes:hover {
+  color: #E5F9EE;
+  background: #13B35D;
+  border: 1px solid #13B35D;
+}
+.modal-save-select .btn-container .btn-yes:disabled {
+  color: #D2D2D2;
+  background: #979797;
+  border: 1px solid #979797;
+}
+.modal-save-select .btn-container .btn-no:hover {
+  color: #FAE2E4;
+  background: #BF2C38;
+  border: 1px solid #BF2C38;
+}
+
 .overlay {
   position: fixed;
   top: 0;
