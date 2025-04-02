@@ -482,22 +482,15 @@
 .a-tools-container .content-container .content-card .text-container .status i {
   margin-right: 8px;
 }
-.a-tools-container .content-container .content-card .text-container .status.Approved {
+.a-tools-container .content-container .content-card .text-container .available {
   color: #13B35D;
-  background: #E5F9EE;
-  border: 1px solid #E5F9EE;
 }
-.a-tools-container .content-container .content-card .text-container .status.Waiting {
-  color: #F2A028;
-  background: #FDF8E7;
-  border: 1px solid #FDF8E7;
+.a-tools-container .content-container .content-card .text-container .out-of-stock {
+  color: #BF2C38;
 }
-.a-tools-container .content-container .content-card .text-container .topic {
+.a-tools-container .content-container .content-card .text-container .name {
   font-size: 24px;
   margin-top: 8px;
-}
-.a-tools-container .content-container .content-card .text-container .desc {
-  color: #979797;
 }
 .a-tools-container .content-container .content-card .edit-del-container {
   display: flex;
@@ -540,6 +533,7 @@
 .a-tools-container .form .preview-image {
   width: 100%;
   border-radius: 8px;
+  margin-bottom: 16px;
 }
 .a-tools-container .form .btn-container {
   margin-top: 16px;

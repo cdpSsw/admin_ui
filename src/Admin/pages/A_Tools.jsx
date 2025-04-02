@@ -66,7 +66,7 @@ const A_Tools = ({ id }) => {
       img4: ev3,
       name: "Tool Name #1",
       quantity: 20,
-      available: 20,
+      available: 0,
     },
     {
       img1: sc3,
@@ -78,6 +78,67 @@ const A_Tools = ({ id }) => {
       available: 20,
     },
   ];
+
+  // Post *Tools
+  const [name, setName] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [available, setAvailable] = useState(quantity);
+  const [imgFront, setImgFront] = useState();
+  const [imgBack, setImgBack] = useState();
+  const [imgLeft, setImgLeft] = useState();
+  const [imgRight, setImgRight] = useState();
+  const [previewFront, setPreviewFront] = useState();
+  const [previewBack, setPreviewBack] = useState();
+  const [previewLeft, setPreviewLeft] = useState();
+  const [previewRight, setPreviewRight] = useState();
+
+  const handlePreviewFront = (e) => {
+    setImgFront(e);
+    setPreviewFront(URL.createObjectURL(e));
+  };
+  const handlePreviewBack = (e) => {
+    setImgBack(e);
+    setPreviewBack(URL.createObjectURL(e));
+  };
+  const handlePreviewLeft = (e) => {
+    setImgLeft(e);
+    setPreviewLeft(URL.createObjectURL(e));
+  };
+  const handlePreviewRight = (e) => {
+    setImgRight(e);
+    setPreviewRight(URL.createObjectURL(e));
+  };
+
+  // Put *Tools
+  const [oldInfo, setOldInfo] = useState([]);
+  const [newName, setNewName] = useState("");
+  const [newQuantity, setNewQuantity] = useState("");
+  const [newAvailable, setNewAvailable] = useState(newQuantity);
+  const [newImgFront, setNewImgFront] = useState();
+  const [newImgBack, setNewImgBack] = useState();
+  const [newImgLeft, setNewImgLeft] = useState();
+  const [newImgRight, setNewImgRight] = useState();
+  const [newPreviewFront, setNewPreviewFront] = useState();
+  const [newPreviewBack, setNewPreviewBack] = useState();
+  const [newPreviewLeft, setNewPreviewLeft] = useState();
+  const [newPreviewRight, setNewPreviewRight] = useState();
+
+  const handleNewPreviewFront = (e) => {
+    setNewImgFront(e);
+    setNewPreviewFront(URL.createObjectURL(e));
+  };
+  const handleNewPreviewBack = (e) => {
+    setNewImgBack(e);
+    setNewPreviewBack(URL.createObjectURL(e));
+  };
+  const handleNewPreviewLeft = (e) => {
+    setNewImgLeft(e);
+    setNewPreviewLeft(URL.createObjectURL(e));
+  };
+  const handleNewPreviewRight = (e) => {
+    setNewImgRight(e);
+    setNewPreviewRight(URL.createObjectURL(e));
+  };
 
   // Overlay
   const [selectedimg1, setSelectedimg1] = useState(null);
@@ -103,7 +164,7 @@ const A_Tools = ({ id }) => {
   return (
     <main className="a-tools-container">
       <section className="top-container">
-        <h1 className="name">Tools Management</h1>
+        <h1 className="topic">Tools Management</h1>
         <section className="add-new-container">
           <button
             data-bs-toggle="modal"
@@ -127,7 +188,7 @@ const A_Tools = ({ id }) => {
                 centeredSlides={true}
                 pagination={{ clickable: true }}
                 autoplay={{ delay: 2500, disableOnInteraction: false }}
-                modules={[ Autoplay, Pagination ]}
+                modules={[Autoplay, Pagination]}
                 className="swiper"
               >
                 {[
@@ -143,15 +204,32 @@ const A_Tools = ({ id }) => {
               </Swiper>
 
               <section className="text-container">
-                {toolsItem.available > 0 
-                ? (
-                    <p className="available">Available {toolsItem.available}/{toolsItem.quantity}</p>
-                ) 
-                : (
-                    <p className="out-of-stock">Out Of Stock</p>
-                )
-                }
+                {toolsItem.available > 0 ? (
+                  <p className="available">
+                    Available {toolsItem.available}/{toolsItem.quantity}
+                  </p>
+                ) : (
+                  <p className="out-of-stock">Out Of Stock</p>
+                )}
                 <h1 className="name">{toolsItem.name}</h1>
+                <section className="edit-del-container">
+                  <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-update"
+                    className="btn btn-update"
+                    onClick={() => setOldInfo(toolsItem)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-delete"
+                    className="btn btn-del"
+                    // onClick={() => setDelInfo(toolsItem)}
+                  >
+                    Delete
+                  </button>
+                </section>
               </section>
             </section>
           </section>
@@ -165,7 +243,7 @@ const A_Tools = ({ id }) => {
         modalFooterStyle="d-none"
         modalBodyContent={
           <form className="form">
-            <h1 className="name">tools</h1>
+            <h1 className="topic">tools</h1>
 
             {/* name */}
             <div className="input-box">
@@ -178,7 +256,7 @@ const A_Tools = ({ id }) => {
                 id="name"
                 className="form-control mb-3"
                 placeholder="ex. tools #1"
-                onChange={(e) => setname(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
 
@@ -187,33 +265,84 @@ const A_Tools = ({ id }) => {
               <label htmlFor="quantity" className="mb-2">
                 * quantity
               </label>
-              <textarea
-                type="text"
+              <input
+                type="number"
                 name="quantity"
                 id="quantity"
                 className="form-control mb-3"
-                placeholder="type quantity..."
-                onChange={(e) => setquantity(e.target.value)}
-              ></textarea>
+                placeholder="quantity..."
+                onChange={(e) => setQuantity(e.target.value)}
+              />
             </div>
 
             {/* Image */}
             <div className="input-box">
-              <label htmlFor="image" className="mb-2">
-                * Image
+              <label htmlFor="imageFront" className="mb-2">
+                * Image Front
               </label>
               <input
                 type="file"
-                name="image"
+                name="imageFront"
                 id="image"
                 className="form-control mb-3"
-                onChange={(e) => handleimg1(e.target.files[0])}
+                onChange={(e) => handlePreviewFront(e.target.files[0])}
               />
             </div>
 
-            {/* {previewImage ? (
-              <img1 src={previewImage} className="preview-image" />
-            ) : null} */}
+            {previewFront ? (
+              <img src={previewFront} className="preview-image" />
+            ) : null}
+
+            <div className="input-box">
+              <label htmlFor="imageBack" className="mb-2">
+                * Image Back
+              </label>
+              <input
+                type="file"
+                name="imageBack"
+                id="image"
+                className="form-control mb-3"
+                onChange={(e) => handlePreviewBack(e.target.files[0])}
+              />
+            </div>
+
+            {previewBack ? (
+              <img src={previewBack} className="preview-image" />
+            ) : null}
+
+            <div className="input-box">
+              <label htmlFor="imageLeft" className="mb-2">
+                * Image Left
+              </label>
+              <input
+                type="file"
+                name="imageLeft"
+                id="image"
+                className="form-control mb-3"
+                onChange={(e) => handlePreviewLeft(e.target.files[0])}
+              />
+            </div>
+
+            {previewLeft ? (
+              <img src={previewLeft} className="preview-image" />
+            ) : null}
+
+            <div className="input-box">
+              <label htmlFor="imageRight" className="mb-2">
+                * Image Right
+              </label>
+              <input
+                type="file"
+                name="imageRight"
+                id="image"
+                className="form-control mb-3"
+                onChange={(e) => handlePreviewRight(e.target.files[0])}
+              />
+            </div>
+
+            {previewRight ? (
+              <img src={previewRight} className="preview-image" />
+            ) : null}
 
             <section className="btn-container">
               <button
@@ -244,7 +373,7 @@ const A_Tools = ({ id }) => {
         modalFooterStyle="d-none"
         modalBodyContent={
           <form className="form">
-            <h1 className="name">tools</h1>
+            <h1 className="topic">tools</h1>
 
             {/* name */}
             <div className="input-box">
@@ -256,8 +385,8 @@ const A_Tools = ({ id }) => {
                 name="name"
                 id="name"
                 className="form-control mb-3"
-                // placeholder={oldInfo.name}
-                onChange={(e) => setNewname(e.target.value)}
+                placeholder={oldInfo.name}
+                onChange={(e) => setNewName(e.target.value)}
               />
             </div>
 
@@ -266,50 +395,95 @@ const A_Tools = ({ id }) => {
               <label htmlFor="quantity" className="mb-2">
                 * quantity
               </label>
-              <textarea
-                type="text"
+              <input
+                type="number"
                 name="quantity"
                 id="quantity"
                 className="form-control mb-3"
-                // placeholder={oldInfo.quantity}
-                onChange={(e) => setNewquantity(e.target.value)}
-              ></textarea>
-            </div>
-
-            {/* Image */}
-            <div className="input-box">
-              <label htmlFor="image" className="mb-2">
-                * Image
-              </label>
-              <input
-                type="file"
-                name="image"
-                id="image"
-                className="form-control mb-3"
-                onChange={(e) => handleNewimg1(e.target.files[0])}
+                placeholder={oldInfo.quantity}
+                onChange={(e) => setNewQuantity(e.target.value)}
               />
             </div>
 
-            {/* {previewImage ? (
-              <img1 src={previewImage} className="preview-image" />
+            {/* Image Front */}
+            <div className="input-box">
+              <label htmlFor="imageFront" className="mb-2">
+                * Image Front
+              </label>
+              <input
+                type="file"
+                name="imageFront"
+                id="imageFront"
+                className="form-control mb-3"
+                onChange={(e) => handleNewPreviewFront(e.target.files[0])}
+              />
+            </div>
+
+            {newPreviewFront ? (
+              <img src={newPreviewFront} className="preview-image" />
+            ) : oldInfo?.img1 ? (
+              <img src={oldInfo.img1} className="preview-image" />
             ) : null}
 
-            {oldInfo ? (
-              newPreviewImage ? (
-                <img1
-                  src={newPreviewImage}
-                  alt="New Preview"
-                  className="preview-image"
-                />
-              ) : (
-                <img1
-                  className="preview-image"
-                  // src={`${API_URL}/images/stu_tools/${oldInfo.image}`}
-                  src={oldInfo.img1}
-                  alt={oldInfo.name}
-                />
-              )
-            ) : null} */}
+            {/* Image Back */}
+            <div className="input-box">
+              <label htmlFor="imageBack" className="mb-2">
+                * Image Back
+              </label>
+              <input
+                type="file"
+                name="imageBack"
+                id="imageBack"
+                className="form-control mb-3"
+                onChange={(e) => handleNewPreviewBack(e.target.files[0])}
+              />
+            </div>
+
+            {newPreviewBack ? (
+              <img src={newPreviewBack} className="preview-image" />
+            ) : oldInfo?.img2 ? (
+              <img src={oldInfo.img2} className="preview-image" />
+            ) : null}
+
+            {/* Image Left */}
+            <div className="input-box">
+              <label htmlFor="imageLeft" className="mb-2">
+                * Image Left
+              </label>
+              <input
+                type="file"
+                name="imageLeft"
+                id="imageLeft"
+                className="form-control mb-3"
+                onChange={(e) => handleNewPreviewLeft(e.target.files[0])}
+              />
+            </div>
+
+            {newPreviewLeft ? (
+              <img src={newPreviewLeft} className="preview-image" />
+            ) : oldInfo?.img3 ? (
+              <img src={oldInfo.img3} className="preview-image" />
+            ) : null}
+
+            {/* Image Right */}
+            <div className="input-box">
+              <label htmlFor="imageRight" className="mb-2">
+                * Image Right
+              </label>
+              <input
+                type="file"
+                name="imageRight"
+                id="imageRight"
+                className="form-control mb-3"
+                onChange={(e) => handleNewPreviewRight(e.target.files[0])}
+              />
+            </div>
+
+            {newPreviewRight ? (
+              <img src={newPreviewRight} className="preview-image" />
+            ) : oldInfo?.img4 ? (
+              <img src={oldInfo.img4} className="preview-image" />
+            ) : null}
 
             <section className="btn-container">
               <button
@@ -323,10 +497,10 @@ const A_Tools = ({ id }) => {
 
               <button
                 type="button"
-                // onClick={handlePuttools}
-                className="btn btn-update"
+                // onClick={handlePosttools}
+                className="btn btn-add"
               >
-                Update
+                Add New
               </button>
             </section>
           </form>
