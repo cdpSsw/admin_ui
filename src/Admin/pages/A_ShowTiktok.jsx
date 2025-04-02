@@ -11,6 +11,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 const A_ShowTiktok = ({ id }) => {
   const showTiktok = [
     {
+      id: 1,
       studentID: '64053441',
       topic: "Ex Topic #1 ",
       description: "Description Support Topic",
@@ -19,6 +20,7 @@ const A_ShowTiktok = ({ id }) => {
       status: "Approved",
     },
     {
+      id: 2,
       studentID: '64053441',
       topic: "Ex Topic #2 ",
       description: "Description Support Topic",
@@ -27,6 +29,7 @@ const A_ShowTiktok = ({ id }) => {
       status: "Approved",
     },
     {
+      id: 3,
       studentID: '64053441',
       topic: "Ex Topic #1 ",
       description: "Description Support Topic",
@@ -35,6 +38,7 @@ const A_ShowTiktok = ({ id }) => {
       status: "Waiting",
     },
     {
+      id: 4,
       studentID: '64053441',
       topic: "Ex Topic #2 ",
       description: "Description Support Topic",
@@ -106,7 +110,7 @@ const A_ShowTiktok = ({ id }) => {
         withCredentials: true,
       });
       if (res.status === 200) {
-        setNewSelect(res.data);
+        // setNewSelect(res.data);
       } else {
         alert(`Error to get *Showcase, [Check/Log]`);
         return;

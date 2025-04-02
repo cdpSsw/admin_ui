@@ -134,7 +134,7 @@ const A_ShowCase = ({ id }) => {
 
   // Post *Selected Showcase
   const [newSelect, setNewSelect] = useState([]);
-  console.log(newSelect)
+  // console.log(newSelect)
 
    // GET SELECTED *SHOWCASE
    const handleGetSelectedShowcase = async () => {
