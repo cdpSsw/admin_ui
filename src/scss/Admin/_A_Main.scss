@@ -44,6 +44,7 @@
         .nav-link.active {
           font-weight: 600;
           background: var.$bg-active;
+          // background: red;
         }
       }
     }
@@ -73,6 +74,12 @@
       .nav-container {
         .link-name {
           display: none;
+        }
+
+        .nav-link.active {
+          border-radius: 50%;
+          padding-top: 14px;
+          padding-bottom: 18px;
         }
       }
     }

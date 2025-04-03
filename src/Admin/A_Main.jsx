@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../public/main.css";
 
 // icons + emblem + svg
@@ -12,13 +12,24 @@ import Settings from "../DAssets/icons/icon-settings.svg";
 import SignOut from "../DAssets/icons/icon-sign-out.svg";
 
 // Components
+import A_App from "./A_App";
+import A_Home from "./pages/A_Home";
 import A_ShowCase from "./pages/A_ShowCase";
 import A_ShowTiktok from "./pages/A_ShowTiktok";
 import A_Tools from "./pages/A_Tools";
 import A_Members from "./pages/A_Members";
 
-const A_Main = () => {
-  const [selectComp, setSelectComp] = useState("Admin-ShowCase");
+const A_Main = ({ showComp, setSelectComp1 }) => {
+  const [selectComp, setSelectComp] = useState("Admin-Home");
+  console.log("selectComp: ", selectComp);
+  console.log("showComp: ", showComp);
+
+  useEffect(() => {
+    if (showComp) {
+      setSelectComp(showComp);
+    }
+  }, [showComp]);
+
   const navListTop = [
     {
       icon: Home,
@@ -61,6 +72,7 @@ const A_Main = () => {
 
   return (
     <main className="a-main-container row m-0">
+      {/* Sidebar - Desktop */}
       <article className="desktop-view col-md-2">
         <section className="emblem-container">
           <img src={Emblem} alt="Emblem-Comen" className="emblem" />
@@ -71,11 +83,13 @@ const A_Main = () => {
             {navListTop.map((list, idx) => (
               <li
                 key={idx}
-                className={`nav-link
-                  ${list.path === selectComp ? "active" : ""}
-                `}
+                className={`nav-link ${
+                  list.path === selectComp ? "active" : ""
+                }`}
                 onClick={() => setSelectComp(list.path)}
               >
+                {/* <h1>{selectComp}</h1>
+                <h1>{list.path}</h1> */}
                 <img src={list.icon} alt={list.name} />
                 <span className="link-name">{list.name}</span>
               </li>
@@ -99,6 +113,7 @@ const A_Main = () => {
         </section>
       </article>
 
+      {/* Sidebar - Mobile */}
       <article className="mobile-view">
         <nav className="navbar navbar-expand-lg p-0">
           <div className="container">
@@ -127,12 +142,16 @@ const A_Main = () => {
                 `}
                       onClick={() => setSelectComp(list.path)}
                     >
-                      <img src={list.icon} alt={list.name} className="nav-icon"/>
+                      <img
+                        src={list.icon}
+                        alt={list.name}
+                        className="nav-icon"
+                      />
                       <span className="link-name">{list.name}</span>
                     </li>
                   ))}
                 </li>
-                
+
                 <hr />
                 <li className="nav-item">
                   {navListBottom.map((list, idx) => (
@@ -143,7 +162,11 @@ const A_Main = () => {
                 `}
                       onClick={() => setSelectComp(list.path)}
                     >
-                      <img src={list.icon} alt={list.name} className="nav-icon" />
+                      <img
+                        src={list.icon}
+                        alt={list.name}
+                        className="nav-icon"
+                      />
                       <span className="link-name">{list.name}</span>
                     </a>
                   ))}
@@ -155,6 +178,7 @@ const A_Main = () => {
       </article>
 
       <article className="select-comp-container col-md-10">
+        {selectComp === "Admin-Home" && <A_Home />}
         {selectComp === "Admin-ShowFiles" && <A_ShowCase />}
         {selectComp === "Admin-ShowTiktok" && <A_ShowTiktok />}
         {selectComp === "Admin-Tools" && <A_Tools />}

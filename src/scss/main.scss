@@ -1,5 +1,6 @@
 // Admin
 @use './Admin/A_Main';
+@use './Admin/pages/A_Home';
 @use './Admin/pages/A_ShowCase';
 @use './Admin/pages/A_ShowTikok';
 @use './Admin/pages/A_Tools';
@@ -11,6 +12,9 @@
 @use './Client/components/Nav';
 @use './Client/components/PagesHeader';
 @use './Client/homeComp/Header';
+
+// ... homeComp
+@use './Client/homeComp/_hc-Showcase';
 
 // EComponents
 @use './EComponents/ModalApprove';

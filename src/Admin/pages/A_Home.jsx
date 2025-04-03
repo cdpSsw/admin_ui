@@ -1,0 +1,362 @@
+import React, { useState, useEffect } from "react";
+
+import ev1 from "../../DAssets/exposter/ev1.png";
+import ev2 from "../../DAssets/exposter/ev2.png";
+import ev3 from "../../DAssets/exposter/ev3.png";
+
+// Components
+import A_App from "../A_App";
+import A_Main from "../A_Main";
+
+import Modal from "../../EComponents/Modal";
+
+const A_Home = () => {
+  const [openShowFiles, setOpenShowFiles] = useState(false);
+  const [openShowTiktok, setOpenShowTiktok] = useState(false);
+  const [openComp, setOpenComp] = useState();
+
+  //   Showcase (Files) Management
+  const [oldCase, setOldCase] = useState([]);
+  const [showcases, setShowcases] = useState([]);
+  const [topicCase, setTopicCase] = useState("");
+  const [descCase, setDescCase] = useState("");
+
+  const showcaseInfo = [
+    {
+      topic: "Our Showcase (Files)",
+      description:
+        "เวทีแสดงศักยภาพ ความคิดสร้างสรรค์และผลงานสุดโดดเด่นจากนักศึกษามหาวิทยาลัยศรีปทุมที่นี่คือพื้นที่สำหรับการนำเสนอไอเดีย แรงบันดาลใจและความสามารถของนักศึกษาผ่านผลงานที่หลากหลาย",
+    },
+  ];
+  const showcase = [
+    {
+      id: 1,
+      studentID: "64053441",
+      image: ev1,
+      topic: "Main Topic #1",
+      description: "Description Support Topic",
+      status: "Approved",
+    },
+    {
+      id: 2,
+      studentID: "64053441",
+      image: ev2,
+      topic: "Main Topic #2",
+      description: "Description Support Topic",
+      status: "Approved",
+    },
+    {
+      id: 3,
+      studentID: "64053441",
+      image: ev3,
+      topic: "Main Topic #3",
+      description: "Description Support Topic",
+      status: "Approved",
+    },
+  ];
+
+  const handleViewAllShowcase = () => {
+    setOpenComp("Admin-ShowFiles");
+  };
+
+  //   showcase (Tiktok) Management
+  const [oldTiktok, setOldTiktok] = useState([]);
+  const [showTiktoks, setShowTiktok] = useState([]);
+  const [topicTiktok, setTopicTiktok] = useState("");
+  const [descTiktok, setDescTiktok] = useState("");
+
+  const showtiktokInfo = [
+    {
+      topic: "Our Showcase (Tiktok)",
+      description:
+        "เวทีแสดงศักยภาพ ความคิดสร้างสรรค์และผลงานสุดโดดเด่นจากนักศึกษามหาวิทยาลัยศรีปทุมที่นี่คือพื้นที่สำหรับการนำเสนอไอเดีย แรงบันดาลใจและความสามารถของนักศึกษาผ่านผลงานที่หลากหลาย",
+    },
+  ];
+  const showTiktok = [
+    {
+      id: 1,
+      studentID: "64053441",
+      topic: "Ex Topic #1 ",
+      description: "Description Support Topic",
+      embed:
+        '<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@impeanuts/video/7477057682168384786" data-video-id="7477057682168384786" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@impeanuts" href="https://www.tiktok.com/@impeanuts?refer=embed">@impeanuts</a> เด็กคอมรัน  เขียนโค้ด ❌ แก้โค้ด ✅ <a title="spu" target="_blank" href="https://www.tiktok.com/tag/spu?refer=embed">#spu</a> <a title="fyp" target="_blank" href="https://www.tiktok.com/tag/fyp?refer=embed">#fyp</a> <a target="_blank" title="♬ original sound - sp99d.s0ngs" href="https://www.tiktok.com/music/original-sound-7071809975861005099?refer=embed">♬ original sound - sp99d.s0ngs</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>',
+      status: "Approved",
+    },
+    {
+      id: 2,
+      studentID: "64053441",
+      topic: "Ex Topic #2 ",
+      description: "Description Support Topic",
+      embed:
+        '<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@bunniebinie/video/7477156937201782024" data-video-id="7477156937201782024" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@bunniebinie" href="https://www.tiktok.com/@bunniebinie?refer=embed">@bunniebinie</a> <a title="cpe" target="_blank" href="https://www.tiktok.com/tag/cpe?refer=embed">#CPE</a> <a title="it_spu" target="_blank" href="https://www.tiktok.com/tag/it_spu?refer=embed">#it_spu</a> <a title="spu" target="_blank" href="https://www.tiktok.com/tag/spu?refer=embed">#spu</a> <a target="_blank" title="♬ original sound - Hellomello - Hellomellooo" href="https://www.tiktok.com/music/original-sound-Hellomello-7477157015078308624?refer=embed">♬ original sound - Hellomello - Hellomellooo</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>',
+      status: "Approved",
+    },
+    {
+      id: 3,
+      studentID: "64053441",
+      topic: "Ex Topic #1 ",
+      description: "Description Support Topic",
+      embed:
+        '<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@sripatum.spu/video/7368684229170957576" data-video-id="7368684229170957576" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@sripatum.spu" href="https://www.tiktok.com/@sripatum.spu?refer=embed">@sripatum.spu</a> <p>สาย IT ต้องห้ามพลาด‼️ คณะเทคโนฯ มัดรวมความรู้ จัดเต็มอัดแน่นมาให้น้องๆ แล้วว ถ้าเรื่อง IT มันใช่ มาสมัครเป็น DEK IT SPU ได้เลย #คณะเทคโนโลยีสารสนเทศ #มหาวิทยาลัยศรีปทุม #SPU #SripatumUniversity #Dek67 #TCAS67 #TGAT67 #TPAT67</p> <a target="_blank" title="♬ เสียงต้นฉบับ  - Sripatum University SPU" href="https://www.tiktok.com/music/เสียงต้นฉบับ-Sripatum-University-SPU-7368684324280896257?refer=embed">♬ เสียงต้นฉบับ  - Sripatum University SPU</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>',
+      status: "Waiting",
+    },
+  ];
+
+  // Load Tiktok
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://www.tiktok.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [showTiktok]);
+
+  return (
+    <>
+      {openComp ? (
+        <A_Main showComp={openComp} setSelectComp1={setOpenComp} />
+      ) : (
+        <main className="a-home-container">
+          <article className="top-container">
+            <h1 className="topic">Hi, Danny</h1>
+            <section className="add-new-container">
+              <button
+                data-bs-toggle="modal"
+                data-bs-target="#modal-add-new"
+                className="btn btn-add-new"
+              >
+                Add New
+              </button>
+            </section>
+          </article>
+          <hr />
+
+          <article className="content-container row m-0">
+            <section className="left-side col-md-6">
+              {showcaseInfo.map((showcaseInfo, idx) => (
+                <section key={idx} className="showcase-files-container">
+                  <section className="top-container">
+                    <h1 className="topic">Showcase (Files) Managemnet </h1>
+
+                    <section className="setting-container">
+                      <i
+                        className="bi bi-three-dots"
+                        onClick={() => setOpenShowFiles(!openShowFiles)}
+                      ></i>
+
+                      {openShowFiles && (
+                        <ul className="setting-items">
+                          <li>
+                            <button
+                              data-bs-toggle="modal"
+                              data-bs-target="#modal-edit-showcase"
+                              onClick={() => setOldCase(showcaseInfo)}
+                            >
+                              Edit Information
+                            </button>
+                          </li>
+                          <li>
+                            <button onClick={handleViewAllShowcase}>
+                              View All Showcase
+                            </button>
+                          </li>
+                        </ul>
+                      )}
+                    </section>
+                  </section>
+                  <div className="hr"></div>
+
+                  <section className="info-container">
+                    <h1 className="topic">
+                      Topic: <span>{showcaseInfo.topic}</span>
+                    </h1>
+                    <p className="desc">
+                      Description:{" "}
+                      <span>
+                        {showcaseInfo.description}
+                      </span>
+                    </p>
+                  </section>
+
+                  <section className="showcase-container row m-0">
+                    {showcase.map((showcaseItem, idx) => (
+                      <section key={idx} className="col-lg-4">
+                        <section className="showcase-card">
+                          <img
+                            src={showcaseItem.image}
+                            alt={showcaseItem.topic}
+                            className="showcase-image"
+                          />
+                          <section className="text-container">
+                            {showcaseItem.status === "Approved" ? (
+                              <span
+                                className={`status
+                        ${showcaseItem.status === "Approved" ? "Approved" : ""}
+                      `}
+                              >
+                                <i className="bi bi-check-circle-fill"></i>
+                                {showcaseItem.status}
+                              </span>
+                            ) : (
+                              <span
+                                className={`status
+                        ${showcaseItem.status === "Waiting" ? "Waiting" : ""}
+                      `}
+                                data-bs-toggle="modal"
+                                data-bs-target="#modal-approve"
+                                onClick={() => setApproveItem(showcaseItem)}
+                              >
+                                <i className="bi bi-clock-fill"></i>
+                                {showcaseItem.status}
+                              </span>
+                            )}
+
+                            <section>
+                              <p className="id">
+                                Student ID: {showcaseItem.studentID}
+                              </p>
+                              <h1 className="topic">{showcaseItem.topic}</h1>
+                              <p className="desc">{showcaseItem.description}</p>
+                            </section>
+                          </section>
+                        </section>
+                      </section>
+                    ))}
+                  </section>
+                </section>
+              ))}
+            </section>
+
+            <section className="right-side col-md-6">
+              {showtiktokInfo.map((showtiktokInfo, idx) => (
+                <section key={idx} className="showtiktok-files-container">
+                  <section className="top-container">
+                    <h1 className="topic">Showcase (Files) Managemnet </h1>
+                    <section className="setting-container">
+                      <i
+                        className="bi bi-three-dots"
+                        onClick={() => setOpenShowTiktok(!openShowTiktok)}
+                      ></i>
+
+                      {openShowTiktok && (
+                        <ul className="setting-items">
+                          <li>
+                            <button
+                              data-bs-toggle="modal"
+                              data-bs-target="#modal-edit-showtiktok"
+                              onClick={() => setOldTiktok(showtiktokInfo)}
+                            >
+                              Edit Information
+                            </button>
+                          </li>
+                          <li>
+                            <button onClick={handleViewAllShowcase}>
+                              View All Showcase
+                            </button>
+                          </li>
+                        </ul>
+                      )}
+                    </section>
+                  </section>
+                  <div className="hr"></div>
+
+                  <section className="info-container">
+                    <h1 className="topic">
+                      Topic: <span>{showtiktokInfo.topic}</span>
+                    </h1>
+                    <p className="desc">
+                      Description: <span>{showtiktokInfo.description}</span>
+                    </p>
+                  </section>
+
+                  <section className="showtiktok-container row m-0">
+                    {showTiktok.map((showTiktokItem, idx) => (
+                      <section key={idx} className="col-lg-12">
+                        <section className="showtiktok-card">
+                          <section
+                            className="content-tiktok"
+                            key={idx}
+                            dangerouslySetInnerHTML={{
+                              __html: showTiktokItem.embed,
+                            }}
+                          />
+
+                          <section className="text-container">
+                            {showTiktokItem.status === "Approved" ? (
+                              <span
+                                className={`status
+                        ${
+                          showTiktokItem.status === "Approved" ? "Approved" : ""
+                        }
+                      `}
+                              >
+                                <i className="bi bi-check-circle-fill"></i>
+                                {showTiktokItem.status}
+                              </span>
+                            ) : (
+                              <span
+                                className={`status
+                        ${showTiktokItem.status === "Waiting" ? "Waiting" : ""}
+                      `}
+                                data-bs-toggle="modal"
+                                data-bs-target="#modal-approve"
+                                onClick={() => setApproveItem(showTiktokItem)}
+                              >
+                                <i className="bi bi-clock-fill"></i>
+                                {showTiktokItem.status}
+                              </span>
+                            )}
+
+                            <section>
+                              <p className="id">
+                                Student ID: {showTiktokItem.studentID}
+                              </p>
+                              <h1 className="topic">{showTiktokItem.topic}</h1>
+                              <p className="desc">
+                                {showTiktokItem.description}
+                              </p>
+                            </section>
+                          </section>
+                        </section>
+                      </section>
+                    ))}
+                  </section>
+                </section>
+              ))}
+            </section>
+          </article>
+        </main>
+      )}
+
+      <Modal
+        modalID="modal-edit-showcase"
+        modalHeaderStyle="d-none"
+        modalFooterStyle="d-none"
+        modalBodyContent={
+          <form className="form">
+            <h1 className="topic">Edit Showcase</h1>
+
+            <div className="input-box">
+              <label htmlFor="topicCase" className="form-label">
+                * Topic
+              </label>
+              <input
+                type="text"
+                name="topicCase"
+                id="topicCase"
+                placeholder={showcaseInfo.topic}
+                className="form-control"
+                onChange={(e) => setTopicCase(e.target.value)}
+              />
+            </div>
+          </form>
+        }
+      />
+    </>
+  );
+};
+
+export default A_Home;

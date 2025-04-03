@@ -1,13 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import { createHashRouter, RouterProvider, useLocation } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 
 // Admin
 import A_Main from './Admin/A_Main';
 
 // Client
-import Client_Main from './Clinent/User_Main';
+import Client_Main from './Client/User_Main';
 
 const router = createHashRouter([
   { path: '/', element: <A_Main /> },
