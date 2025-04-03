@@ -391,6 +391,44 @@
   color: #979797;
 }
 
+.a-home-form {
+  padding: 16px;
+}
+.a-home-form .topic {
+  text-align: center;
+  font-style: italic;
+}
+.a-home-form .btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.a-home-form .btn-container .btn {
+  margin: 0 4px;
+  border-radius: 32px;
+  transition: all 0.3s ease-out;
+}
+.a-home-form .btn-container .btn.btn-cancel {
+  color: #BF2C38;
+  background: #FAE2E4;
+  border: 1px solid #FAE2E4;
+}
+.a-home-form .btn-container .btn.btn-cancel:hover {
+  color: #FAE2E4;
+  background: #BF2C38;
+  border: 1px solid #BF2C38;
+  box-shadow: 0 0 3px #BF2C38;
+}
+.a-home-form .btn-container .btn.btn-update {
+  color: #E7F3FF;
+  background: #0093FE;
+  border: 1px solid #0093FE;
+}
+.a-home-form .btn-container .btn.btn-update:hover {
+  box-shadow: 0 0 3px #0093FE;
+}
+
 @media screen and (max-width: 725px) {
   .a-home-container .content-container .right-side {
     margin: 16px 0;

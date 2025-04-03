@@ -102,6 +102,12 @@ const A_Home = () => {
     },
   ];
 
+  // Handle Cancel Button
+  const handleCancel = () => {
+    document.getElementById("topicCase").value = "";
+    document.getElementById("descCase").value = "";
+  };
+
   // Load Tiktok
   useEffect(() => {
     const script = document.createElement("script");
@@ -174,10 +180,7 @@ const A_Home = () => {
                       Topic: <span>{showcaseInfo.topic}</span>
                     </h1>
                     <p className="desc">
-                      Description:{" "}
-                      <span>
-                        {showcaseInfo.description}
-                      </span>
+                      Description: <span>{showcaseInfo.description}</span>
                     </p>
                   </section>
 
@@ -336,22 +339,99 @@ const A_Home = () => {
         modalHeaderStyle="d-none"
         modalFooterStyle="d-none"
         modalBodyContent={
-          <form className="form">
+          <form className="a-home-form">
             <h1 className="topic">Edit Showcase</h1>
 
             <div className="input-box">
-              <label htmlFor="topicCase" className="form-label">
+              <label htmlFor="topicCase" className="form-label mb-2">
                 * Topic
               </label>
               <input
                 type="text"
                 name="topicCase"
                 id="topicCase"
-                placeholder={showcaseInfo.topic}
-                className="form-control"
+                placeholder={oldCase.topic}
+                className="form-control mb-3"
                 onChange={(e) => setTopicCase(e.target.value)}
               />
             </div>
+
+            <div className="input-box">
+              <label htmlFor="descCase" className="form-label mb-2">
+                * Description
+              </label>
+              <textarea
+                type="text"
+                name="descCase"
+                id="descCase"
+                placeholder={oldCase.description}
+                className="form-control mb-3"
+                onChange={(e) => setDescCase(e.target.value)}
+              ></textarea>
+            </div>
+
+            <section className="btn-container">
+              <button
+                data-bs-dismiss="modal"
+                className="btn btn-cancel"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+
+              <button className="btn btn-update">Update</button>
+            </section>
+          </form>
+        }
+      />
+
+      <Modal
+        modalID="modal-edit-showtiktok"
+        modalHeaderStyle="d-none"
+        modalFooterStyle="d-none"
+        modalBodyContent={
+          <form className="a-home-form">
+            <h1 className="topic">Edit Showcase</h1>
+
+            <div className="input-box">
+              <label htmlFor="topicTiktok" className="form-label mb-2">
+                * Topic
+              </label>
+              <input
+                type="text"
+                name="topicTiktok"
+                id="topicTiktok"
+                placeholder={oldTiktok.topic}
+                className="form-control mb-3"
+                onChange={(e) => setTopicTiktok(e.target.value)}
+              />
+            </div>
+
+            <div className="input-box">
+              <label htmlFor="descTiktok" className="form-label mb-2">
+                * Description
+              </label>
+              <textarea
+                type="text"
+                name="descTiktok"
+                id="descTiktok"
+                placeholder={oldTiktok.description}
+                className="form-control mb-3"
+                onChange={(e) => setDescTiktok(e.target.value)}
+              ></textarea>
+            </div>
+
+            <section className="btn-container">
+              <button
+                data-bs-dismiss="modal"
+                className="btn btn-cancel"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+
+              <button className="btn btn-update">Update</button>
+            </section>
           </form>
         }
       />
