@@ -1175,7 +1175,8 @@
   box-shadow: 0 0 3px #020202;
 }
 .a-team-container .content-container .content-card {
-  background: #020202;
+  background: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 16px;
   margin: 16px 0;
 }
@@ -1194,12 +1195,12 @@
   margin: 0;
 }
 .a-team-container .content-container .content-card .text-container .position {
-  font-size: 0.8rem;
-  color: #D2D2D2;
+  font-size: 16px;
+  color: #979797;
 }
 .a-team-container .content-container .content-card .text-container .name {
   font-size: 1rem;
-  color: #fff;
+  color: #020202;
 }
 .a-team-container .content-container .content-card .text-container .hr {
   width: 50%;
@@ -1207,34 +1208,65 @@
   background: #979797;
   margin: 16px 0;
 }
-.a-team-container .content-container .content-card .text-container .btn.btn-edit {
+.a-team-container .content-container .content-card .text-container .btn.btn-preview {
   position: relative;
   color: #979797;
   background: none;
   padding: 0;
+  font-size: 14px;
   transition: all 0.3s ease-out;
 }
-.a-team-container .content-container .content-card .text-container .btn.btn-edit i {
+.a-team-container .content-container .content-card .text-container .btn.btn-preview i {
   margin-right: 8px;
 }
-.a-team-container .content-container .content-card .text-container .btn.btn-edit:focus {
+.a-team-container .content-container .content-card .text-container .btn.btn-preview:focus {
   border: none;
 }
-.a-team-container .content-container .content-card .text-container .btn.btn-edit::before {
+.a-team-container .content-container .content-card .text-container .btn.btn-preview::before {
   position: absolute;
   content: "";
   width: 0;
   height: 1px;
-  left: 25px;
   bottom: 0;
   transition: all 0.3s ease-out;
 }
-.a-team-container .content-container .content-card .text-container .btn.btn-edit:hover {
+.a-team-container .content-container .content-card .text-container .btn.btn-preview:hover {
   color: red;
 }
-.a-team-container .content-container .content-card .text-container .btn.btn-edit:hover::before {
-  width: 65%;
+.a-team-container .content-container .content-card .text-container .btn.btn-preview:hover::before {
+  width: 100%;
   background: red;
+}
+.a-team-container .content-container .content-card .text-container .edit-del-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+}
+.a-team-container .content-container .content-card .text-container .edit-del-container .btn {
+  transition: all 0.3s ease-out;
+}
+.a-team-container .content-container .content-card .text-container .edit-del-container .btn-update {
+  color: #0093FE;
+  background: #E7F3FF;
+  border: 1px solid #E7F3FF;
+}
+.a-team-container .content-container .content-card .text-container .edit-del-container .btn-update:hover {
+  color: #E7F3FF;
+  background: #0093FE;
+  border: 1px solid #0093FE;
+  box-shadow: 0 0 3px #0093FE;
+}
+.a-team-container .content-container .content-card .text-container .edit-del-container .btn-del {
+  color: #BF2C38;
+  background: #FAE2E4;
+  border: 1px solid #FAE2E4;
+  margin-left: 8px;
+}
+.a-team-container .content-container .content-card .text-container .edit-del-container .btn-del:hover {
+  color: #FAE2E4;
+  background: #BF2C38;
+  border: 1px solid #BF2C38;
+  box-shadow: 0 0 3px #BF2C38;
 }
 .a-team-container .form {
   padding: 16px;

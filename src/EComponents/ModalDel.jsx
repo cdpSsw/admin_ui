@@ -7,6 +7,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 const ModalDel = ({ modalDelID, modalDelTitle, modalDelContent, modalDelPath }) => {
   // console.log(modalDelContent)
   // console.log(modalDelPath)
+
   const handleDelete = async (id) => {
     try{
       const res = await Axios.delete(`${API_URL}/${modalDelPath}/${id}`, { withCredentials: true } );
@@ -69,9 +70,11 @@ const ModalDel = ({ modalDelID, modalDelTitle, modalDelContent, modalDelPath }) 
             ) : modalDelTitle === '(Admin) tools' ? (
               <h5><span className="delete-topic">{modalDelContent.name}</span>", Are you sure ?</h5>
               
-            
             ) : modalDelTitle === '(Admin) Members' ? (
               <h5><span className="delete-topic">"[{modalDelContent.studentID}] {modalDelContent.fname} {modalDelContent.lname}"</span>", Are you sure ?</h5>
+              
+            ) : modalDelTitle === '(Admin) Teams' ? (
+              <h5><span className="delete-topic">"{modalDelContent.name}"</span>", Are you sure ?</h5>
               
             ) : null }
           </span>

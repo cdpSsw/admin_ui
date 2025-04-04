@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import Axios, { all } from "axios";
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
+
 // Components
 import Modal from "../../EComponents/Modal";
+import ModalDel from "../../EComponents/ModalDel";
 
 import J from "../../DAssets/person/j.png";
 import N from "../../DAssets/person/n.png";
 import B from "../../DAssets/person/b.png";
 import P from "../../DAssets/person/p.png";
-import { img } from "framer-motion/client";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -15,6 +16,7 @@ const A_Team = () => {
   const [selectedInfo, setSelectedInfo] = useState([]);
   const teams = [
     {
+      id: 1,
       image: J,
       name: "ผู้ช่วยศาสตราจารย์ จิโรจน์ จริตควร",
       position: "หัวหน้าสาขาวิชาวิศวกรรมคอมพิวเตอร์",
@@ -45,11 +47,12 @@ const A_Team = () => {
           position: "ตำแหน่ง: อาจารย์ประจำ (2543 – 2547)",
         },
       ],
-      tels: "0 2579 1111 ต่อ 2197",
+      tels: ["0 2579 1111 ต่อ 2197", "0 2579 1111 ต่อ 2197"],
       emails: "chirot.ch@spu.ac.th",
       websites: "https://chirotch.wixsite.com/chirot-charitkhuan",
     },
     {
+      id: 2,
       image: B,
       name: "ดร.สุรชัย ทองแก้ว",
       position: "อาจารย์ประจำ",
@@ -98,6 +101,7 @@ const A_Team = () => {
       websites: "https://surachaith.wixsite.com/dr-bird",
     },
     {
+      id: 3,
       image: N,
       name: "อาจารย์นิมิตร ทักษวิทยาพงศ์",
       position: "หัวหน้าสาขาวิชาวิศวกรรมคอมพิวเตอร์",
@@ -135,6 +139,7 @@ const A_Team = () => {
       websites: "https://nimittu.wixsite.com/spu-nimit",
     },
     {
+      id: 4,
       image: P,
       name: "อาจารย์ภูริลาภ จุฑาวัชระพล",
       position: "อาจารย์ประจำ",
@@ -164,8 +169,9 @@ const A_Team = () => {
     },
   ];
 
-  const [image, setImage] = useState();
+  // POST NEW *TEAM
   const [previewImage, setPreviewImage] = useState();
+  const [image, setImage] = useState();
   const [position, setPosition] = useState("");
   const [name, setName] = useState("");
   const [educations, setEducations] = useState([""]);
@@ -289,40 +295,240 @@ const A_Team = () => {
       : null;
   };
 
-  // Post Teams
   const handlePostTeam = async () => {
     try {
-        const formData = new FormData();
-        formData.append("image", image);
-        formData.append("name", name);
-        formData.append("position", position);
-        formData.append("education", educations.map(edu => edu.trim()).join(","));
-        formData.append("expertise", expertises.map(expt => expt.trim()).join(","));
-        formData.append("expLocation", expLocations.map(expL => expL.trim()).join(","));
-        formData.append("expPosition", expPositions.map(expP => expP.trim()).join(","));
-        formData.append("research", researchs.map(res => res.trim()).join(","));
-        formData.append("tel", tels.map(t => t.trim()).join(","));
-        formData.append("email", emails.map(e => e.trim()).join(","));
-        formData.append("website", websites.map(w => w.trim()).join(","));
-        
-  
-        const res = await Axios.post(`${API_URL}/teams`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-          withCredentials: true,
-        });
-  
-        if (res.status === 200) {
-          alert(`Add New *Team Member Succesful.`);
-          location.reload();
-        } else {
-          alert(`Error to get *Team Member, for this id: ${id}`);
-          location.reload();
-        }
-      } catch {
-        alert(`Internal server ${err}`);
-      }
-  }
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("name", name);
+      formData.append("position", position);
+      formData.append(
+        "education",
+        educations.map((edu) => edu.trim()).join(",")
+      );
+      formData.append(
+        "expertise",
+        expertises.map((expt) => expt.trim()).join(",")
+      );
+      formData.append(
+        "expLocation",
+        expLocations.map((expL) => expL.trim()).join(",")
+      );
+      formData.append(
+        "expPosition",
+        expPositions.map((expP) => expP.trim()).join(",")
+      );
+      formData.append("research", researchs.map((res) => res.trim()).join(","));
+      formData.append("tel", tels.map((t) => t.trim()).join(","));
+      formData.append("email", emails.map((e) => e.trim()).join(","));
+      formData.append("website", websites.map((w) => w.trim()).join(","));
 
+      const res = await Axios.post(`${API_URL}/teams`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
+      });
+
+      if (res.status === 200) {
+        alert(`Add New *Team Member Succesful.`);
+        location.reload();
+      } else {
+        alert(`Error to get *Team Member, for this id: ${id}`);
+        location.reload();
+      }
+    } catch {
+      alert(`Internal server ${err}`);
+    }
+  };
+
+  // PUT *SHOWCASE
+  const [oldInfo, setOldInfo] = useState([""]);
+  const [newPreviewImage, setNewPreviewImage] = useState();
+  const [newImage, setNewImage] = useState();
+  const [newPosition, setNewPosition] = useState("");
+  const [newName, setNewName] = useState("");
+  const [newEducations, setNewEducations] = useState([""]);
+  const [newExpertises, setNewExpertises] = useState([""]);
+  const [newExpLocations, setNewExpLocations] = useState([""]);
+  const [newExpPositions, setNewExpPositions] = useState([""]);
+  const [newResearchs, setNewResearchs] = useState([""]);
+  const [newTels, setNewTels] = useState([""]);
+  const [newEmails, setNewEmails] = useState([""]);
+  const [newWebsites, setNewWebsites] = useState([""]);
+
+  useEffect(() => {
+    if (oldInfo.educations) {
+      setNewEducations(
+        Array.isArray(oldInfo.educations)
+          ? [...oldInfo.educations]
+          : [oldInfo.educations]
+      );
+    }
+
+    if (oldInfo.expertises) {
+      setNewExpertises(
+        Array.isArray(oldInfo.expertises)
+          ? [...oldInfo.expertises]
+          : [oldInfo.expertises]
+      );
+    }
+
+    if (oldInfo.expLocations) {
+      setNewExpLocations(
+        Array.isArray(oldInfo.expLocations)
+          ? [...oldInfo.expLocations]
+          : [oldInfo.expLocations]
+      );
+    }
+
+    if (oldInfo.expPositions) {
+      setNewExpPositions(
+        Array.isArray(oldInfo.expPositions)
+          ? [...oldInfo.expPositions]
+          : [oldInfo.expPositions]
+      );
+    }
+
+    if (oldInfo.researchs) {
+      setNewResearchs(
+        Array.isArray(oldInfo.researchs)
+          ? [...oldInfo.researchs]
+          : [oldInfo.researchs]
+      );
+    }
+
+    if (oldInfo.tels) {
+      setNewTels(
+        Array.isArray(oldInfo.tels) ? [...oldInfo.tels] : [oldInfo.tels]
+      );
+    }
+
+    if (oldInfo.emails) {
+      setNewEmails(
+        Array.isArray(oldInfo.emails) ? [...oldInfo.emails] : [oldInfo.emails]
+      );
+    }
+
+    if (oldInfo.websites) {
+      setNewWebsites(
+        Array.isArray(oldInfo.websites)
+          ? [...oldInfo.websites]
+          : [oldInfo.websites]
+      );
+    }
+  }, [oldInfo]);
+
+  const handleNewFieldChange = (index, value, type) => {
+    const updateField = (setter, field) => {
+      setter((prev) => {
+        const updatedFields = [...prev];
+        updatedFields[index] = value;
+        return updatedFields;
+      });
+    };
+
+    switch (type) {
+      case "newEducations":
+        updateField(setNewEducations, newEducations);
+        break;
+      case "newExpertises":
+        updateField(setNewExpertises, newExpertises);
+        break;
+      case "newExpLocations":
+        updateField(setNewExpLocations, newExpLocations);
+        break;
+      case "newExpPositions":
+        updateField(setNewExpPositions, newExpPositions);
+        break;
+      case "newResearchs":
+        updateField(setNewResearchs, newResearchs);
+        break;
+      case "newTels":
+        updateField(setNewTels, newTels);
+        break;
+      case "newEmails":
+        updateField(setNewEmails, newEmails);
+        break;
+      case "newWebsites":
+        updateField(setNewWebsites, newWebsites);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleNewAddField = (type) => {
+    const addField = (setter) => {
+      setter((prev) => [...prev, ""]);
+    };
+
+    switch (type) {
+      case "newEducations":
+        addField(setNewEducations);
+        break;
+      case "newExpertises":
+        addField(setNewExpertises);
+        break;
+      case "newExpLocations":
+        addField(setNewExpLocations);
+        break;
+      case "newExpPositions":
+        addField(setNewExpPositions);
+        break;
+      case "newResearchs":
+        addField(setNewResearchs);
+        break;
+      case "newTels":
+        addField(setNewTels);
+        break;
+      case "newEmails":
+        addField(setNewEmails);
+        break;
+      case "newWebsites":
+        addField(setNewWebsites);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleNewDeleteField = (index, type) => {
+    const deleteField = (setter) => {
+      setter((prev) => prev.filter((_, i) => i !== index));
+    };
+
+    switch (type) {
+      case "newEducations":
+        deleteField(setNewEducations);
+        break;
+      case "newExpertises":
+        deleteField(setNewExpertises);
+        break;
+      case "newExpLocations":
+        deleteField(setNewExpLocations);
+        break;
+      case "newExpPositions":
+        deleteField(setNewExpPositions);
+        break;
+      case "newResearchs":
+        deleteField(setNewResearchs);
+        break;
+      case "newTels":
+        deleteField(setNewTels);
+        break;
+      case "newEmails":
+        deleteField(setNewEmails);
+        break;
+      case "newWebsites":
+        deleteField(setNewWebsites);
+        break;
+      default:
+        break;
+    }
+  };
+
+  // -----------------------------------------------------------------------------------------------------
+
+  // DELETE *SHOWCASE
+  const [delInfo, setDelInfo] = useState([]);
 
   // Handle Cancel Button
   const handleCancel = () => {
@@ -339,7 +545,6 @@ const A_Team = () => {
     setWebsites([""]);
     setPreviewImage(null);
   };
-  
 
   return (
     <main className="a-team-container">
@@ -364,19 +569,39 @@ const A_Team = () => {
               <img src={team.image} alt={team.name} className="content-img" />
 
               <section className="text-container">
-                <p className="position">{team.position}</p>
-                <h6 className="name">{team.name}</h6>
-                <div className="hr"></div>
                 <button
                   type="button"
                   data-bs-toggle="modal"
                   data-bs-target="#modal-preview"
-                  className="btn btn-edit"
+                  className="btn btn-preview mb-1"
                   onClick={() => setSelectedInfo(team)}
                 >
-                  <i className="bi bi-eye"></i>
+                  {/* <i className="bi bi-eye"></i> */}
                   Preview
                 </button>
+
+                <p className="position">{team.position}</p>
+                <h6 className="name">{team.name}</h6>
+                <div className="hr"></div>
+
+                <section className="edit-del-container">
+                  <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-update"
+                    className="btn btn-update"
+                    onClick={() => setOldInfo(team)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-delete"
+                    className="btn btn-del"
+                    onClick={() => setDelInfo(team)}
+                  >
+                    Delete
+                  </button>
+                </section>
               </section>
             </section>
           </section>
@@ -716,21 +941,21 @@ const A_Team = () => {
                             />
                           </div>
 
-                            {/* Delete Button */}
-                            {index > 0 && (
-                              <div className="btn-del-container col-md-3">
-                                <button
-                                  type="button"
-                                  className="btn btn-danger mb-3"
-                                  onClick={() => {
-                                    handleDeleteField(index, "expLocations");
-                                    handleDeleteField(index, "expPositions");
-                                  }}
-                                >
-                                  Delete
-                                </button>
-                              </div>
-                            )}
+                          {/* Delete Button */}
+                          {index > 0 && (
+                            <div className="btn-del-container col-md-3">
+                              <button
+                                type="button"
+                                className="btn btn-danger mb-3"
+                                onClick={() => {
+                                  handleDeleteField(index, "expLocations");
+                                  handleDeleteField(index, "expPositions");
+                                }}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -764,7 +989,11 @@ const A_Team = () => {
                           className="form-control mb-3"
                           value={researchsValue}
                           onChange={(e) =>
-                            handleFieldChange(index, e.target.value, "researchs")
+                            handleFieldChange(
+                              index,
+                              e.target.value,
+                              "researchs"
+                            )
                           }
                         ></textarea>
                       </div>
@@ -792,35 +1021,499 @@ const A_Team = () => {
 
                 {/* Button */}
                 <section className="btn-container">
-                    <button 
-                        type="button"
-                        className="btn btn-cancel"
-                        data-bs-dismiss="modal"
-                        onClick={handleCancel}
+                  <button
+                    type="button"
+                    className="btn btn-cancel"
+                    data-bs-dismiss="modal"
+                    onClick={handleCancel}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-add"
+                    onClick={handlePostTeam}
+                    disabled={
+                      !image ||
+                      position.trim() === "" ||
+                      name.trim() === "" ||
+                      educations.some((e) => e.trim() === "") ||
+                      expertises.some((e) => e.trim() === "") ||
+                      expLocations.some((e) => e.trim() === "") ||
+                      expPositions.some((e) => e.trim() === "") ||
+                      researchs.some((e) => e.trim() === "") ||
+                      tels.some((e) => e.trim() === "") ||
+                      emails.some((e) => e.trim() === "") ||
+                      websites.some((e) => e.trim() === "")
+                    }
+                  >
+                    Add New
+                  </button>
+                </section>
+              </section>
+            </article>
+          </form>
+        }
+      />
+
+      {/* Modal - Edit */}
+      <Modal
+        modalID="modal-update"
+        modalHeaderStyle="d-none"
+        modalFooterStyle="d-none"
+        modalSize="modal-lg"
+        modalBodyContent={
+          <form className="form">
+            <h1 className="topic">Add New *Team Member</h1>
+            <div className="hr"></div>
+            <article className="form-content row m-0">
+              {/* Left Side */}
+              <section className="input-container col-md-6">
+                {/* Preview Image */}
+                {newPreviewImage ? (
+                  <img
+                    src={newPreviewImage}
+                    className="preview-img"
+                    alt="Preview"
+                  />
+                ) : (
+                  <img
+                    src={oldInfo.image}
+                    className="preview-img"
+                    alt="Preview"
+                  />
+                )}
+
+                {/* Image */}
+                <div className="input-box">
+                  <label htmlFor="image" className="form-label mb-2">
+                    * New Image
+                  </label>
+                  <input
+                    type="file"
+                    id="newImage"
+                    className="form-control mb-3"
+                    onChange={(e) => handleNewImage(e.target.files[0])}
+                  />
+                </div>
+
+                {/* Positon */}
+                <div className="input-box">
+                  <label htmlFor="position" className="form-label mb-2">
+                    * New Position
+                  </label>
+                  <input
+                    type="text"
+                    id="newPosition"
+                    placeholder={oldInfo.position}
+                    className="form-control mb-3"
+                    onChange={(e) => setNewPosition(e.target.value)}
+                  />
+                </div>
+
+                {/* Name */}
+                <div className="input-box">
+                  <label htmlFor="name" className="form-label mb-2">
+                    * New Name
+                  </label>
+                  <input
+                    type="text"
+                    id="newName"
+                    placeholder={oldInfo.name}
+                    className="form-control mb-3"
+                    onChange={(e) => setNewName(e.target.value)}
+                  />
+                </div>
+
+                {/* tels */}
+                <div className="d-flex flex-column">
+                  <label className="form-label mb-2">* New Tels</label>
+                  {newTels.map((telsValue, index) => (
+                    <div
+                      className="input-box d-flex align-items-start gap-2"
+                      key={index}
                     >
-                        Cancel
-                    </button>
-                    <button 
-                        type="button"
-                        className="btn btn-add"
-                        onClick={handlePostTeam}
-                        disabled={
-                            !image ||
-                            position.trim() === "" ||
-                            name.trim() === "" ||
-                            educations.some((e) => e.trim() === "") ||
-                            expertises.some((e) => e.trim() === "") ||
-                            expLocations.some((e) => e.trim() === "") ||
-                            expPositions.some((e) => e.trim() === "") ||
-                            researchs.some((e) => e.trim() === "") ||
-                            tels.some((e) => e.trim() === "") ||
-                            emails.some((e) => e.trim() === "") ||
-                            websites.some((e) => e.trim() === "")
+                      <div className="flex-grow-1">
+                        <textarea
+                          id={`tels-${index}`}
+                          placeholder={telsValue || "New Tel"}
+                          className="form-control mb-3"
+                          value={newTels[index]}
+                          onChange={(e) =>
+                            handleNewFieldChange(
+                              index,
+                              e.target.value,
+                              "newTels"
+                            )
                           }
-                          
+                        ></textarea>
+                      </div>
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          className="btn btn-danger mb-3"
+                          onClick={() => handleNewDeleteField(index, "newTels")}
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleNewAddField("newTels")}
+                    className="btn btn-secondary mb-4"
+                  >
+                    Add Res.
+                  </button>
+                </div>
+
+                {/* emails */}
+                <div className="d-flex flex-column">
+                  <label className="form-label mb-2">* New Emails</label>
+                  {newEmails.map((emailsValue, index) => (
+                    <div
+                      className="input-box d-flex align-items-start gap-2"
+                      key={index}
                     >
-                        Add New
+                      <div className="flex-grow-1">
+                        <textarea
+                          id={`emails-${index}`}
+                          placeholder={emailsValue || "New Email"}
+                          className="form-control mb-3"
+                          value={newEmails[index]}
+                          onChange={(e) =>
+                            handleNewFieldChange(
+                              index,
+                              e.target.value,
+                              "newEmails"
+                            )
+                          }
+                        ></textarea>
+                      </div>
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          className="btn btn-danger mb-3"
+                          onClick={() =>
+                            handleNewDeleteField(index, "newEmails")
+                          }
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleNewAddField("newEmails")}
+                    className="btn btn-secondary mb-4"
+                  >
+                    Add Email.
+                  </button>
+                </div>
+
+                {/* websites */}
+                <div className="d-flex flex-column">
+                  <label className="form-label mb-2">* New Websites</label>
+                  {newWebsites.map((websitesValue, index) => (
+                    <div
+                      className="input-box d-flex align-items-start gap-2"
+                      key={index}
+                    >
+                      <div className="flex-grow-1">
+                        <textarea
+                          id={`websites-${index}`}
+                          placeholder={websitesValue || "New Web"}
+                          className="form-control mb-3"
+                          value={newWebsites[index]}
+                          onChange={(e) =>
+                            handleNewFieldChange(
+                              index,
+                              e.target.value,
+                              "newWebsites"
+                            )
+                          }
+                        ></textarea>
+                      </div>
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          className="btn btn-danger mb-3"
+                          onClick={() =>
+                            handleNewDeleteField(index, "newWebsites")
+                          }
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleNewAddField("newWebsites")}
+                    className="btn btn-secondary mb-4"
+                  >
+                    Add Web.
+                  </button>
+                </div>
+              </section>
+
+              {/* Right Side */}
+              <section className="input-container col-md-6">
+                {/* educations */}
+                <div className="d-flex flex-column">
+                  <label className="form-label mb-2">* New Education</label>
+                  {newEducations.map((educationValue, index) => (
+                    <div
+                      className="input-box d-flex align-items-start gap-2"
+                      key={index}
+                    >
+                      <div className="flex-grow-1">
+                        <textarea
+                          id={`education-${index}`}
+                          placeholder={educationValue || "New Education"}
+                          className="form-control mb-3"
+                          value={newEducations[index]}
+                          onChange={(e) =>
+                            handleNewFieldChange(
+                              index,
+                              e.target.value,
+                              "newEducations"
+                            )
+                          }
+                        ></textarea>
+                      </div>
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          className="btn btn-danger mb-3"
+                          onClick={() =>
+                            handleNewDeleteField(index, "newEducations")
+                          }
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleNewAddField("newEducations")}
+                    className="btn btn-secondary mb-4"
+                  >
+                    Add Edu.
+                  </button>
+                </div>
+
+                {/* expertises */}
+                <div className="d-flex flex-column">
+                  <label className="form-label mb-2">* New Expertises</label>
+                  {newExpertises.map((expertisesValue, index) => (
+                    <div
+                      className="input-box d-flex align-items-start gap-2"
+                      key={index}
+                    >
+                      <div className="flex-grow-1">
+                        <textarea
+                          id={`expertises-${index}`}
+                          placeholder={expertisesValue || "New Ecxpertise"}
+                          className="form-control mb-3"
+                          value={newExpertises[index]}
+                          onChange={(e) =>
+                            handleNewFieldChange(
+                              index,
+                              e.target.value,
+                              "newExpertises"
+                            )
+                          }
+                        ></textarea>
+                      </div>
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          className="btn btn-danger mb-3"
+                          onClick={() =>
+                            handleNewDeleteField(index, "newExpertises")
+                          }
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleNewAddField("newExpertises")}
+                    className="btn btn-secondary mb-4"
+                  >
+                    Add Expt.
+                  </button>
+                </div>
+
+                {/* Experience - Location / Position */}
+                <div>
+                  <p className="topic text-start">Experience</p>
+                  <div className="d-flex flex-column">
+                    <label className="form-label mb-2">
+                      * Location / Position
+                    </label>
+                    {expLocations.map((expLocationsValue, index) => (
+                      <div
+                        className="input-box d-flex flex-column gap-2"
+                        key={index}
+                      >
+                        {/* Location Input */}
+                        <div className="mb-2">
+                          <input
+                            type="text"
+                            id={`expLocations-${index}`}
+                            placeholder="ex. Location"
+                            className="form-control"
+                            value={expLocationsValue}
+                            onChange={(e) =>
+                              handleFieldChange(
+                                index,
+                                e.target.value,
+                                "expLocations"
+                              )
+                            }
+                          />
+                        </div>
+
+                        {/* Position Input */}
+                        <div className="exp-position-box d-flex row">
+                          <div
+                            className={`mb-2 ${
+                              index > 0 ? "col-md-9" : "col-md-12"
+                            }`}
+                          >
+                            {/* Position Input */}
+                            <input
+                              type="text"
+                              id={`expPositions-${index}`}
+                              placeholder="ex. Position"
+                              className="form-control"
+                              value={expPositions[index]}
+                              onChange={(e) =>
+                                handleFieldChange(
+                                  index,
+                                  e.target.value,
+                                  "expPositions"
+                                )
+                              }
+                            />
+                          </div>
+
+                          {/* Delete Button */}
+                          {index > 0 && (
+                            <div className="btn-del-container col-md-3">
+                              <button
+                                type="button"
+                                className="btn btn-danger mb-3"
+                                onClick={() => {
+                                  handleDeleteField(index, "expLocations");
+                                  handleDeleteField(index, "expPositions");
+                                }}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleAddField("expLocations");
+                        handleAddField("expPositions");
+                      }}
+                      className="btn btn-secondary mb-4"
+                    >
+                      Add Expt.
                     </button>
+                  </div>
+                </div>
+
+                {/* researchs */}
+                <div className="d-flex flex-column">
+                  <label className="form-label mb-2">* New Researchs</label>
+                  {newResearchs.map((researchValue, index) => (
+                    <div
+                      className="input-box d-flex align-items-start gap-2"
+                      key={index}
+                    >
+                      <div className="flex-grow-1">
+                        <textarea
+                          id={`researchs-${index}`}
+                          placeholder={researchValue || "New Research"}
+                          className="form-control mb-3"
+                          value={newResearchs[index]}
+                          onChange={(e) =>
+                            handleNewFieldChange(
+                              index,
+                              e.target.value,
+                              "newResearchs"
+                            )
+                          }
+                        ></textarea>
+                      </div>
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          className="btn btn-danger mb-3"
+                          onClick={() =>
+                            handleNewDeleteField(index, "newResearchs")
+                          }
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleNewAddField("newResearchs")}
+                    className="btn btn-secondary mb-4"
+                  >
+                    Add Res.
+                  </button>
+                </div>
+
+                <div className="hr"></div>
+
+                {/* Button */}
+                <section className="btn-container">
+                  <button
+                    type="button"
+                    className="btn btn-cancel"
+                    data-bs-dismiss="modal"
+                    onClick={handleCancel}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-add"
+                    onClick={handlePostTeam}
+                    disabled={
+                      !image ||
+                      position.trim() === "" ||
+                      name.trim() === "" ||
+                      educations.some((e) => e.trim() === "") ||
+                      expertises.some((e) => e.trim() === "") ||
+                      expLocations.some((e) => e.trim() === "") ||
+                      expPositions.some((e) => e.trim() === "") ||
+                      researchs.some((e) => e.trim() === "") ||
+                      tels.some((e) => e.trim() === "") ||
+                      emails.some((e) => e.trim() === "") ||
+                      websites.some((e) => e.trim() === "")
+                    }
+                  >
+                    Add New
+                  </button>
                 </section>
               </section>
             </article>
@@ -916,6 +1609,14 @@ const A_Team = () => {
             </article>
           </article>
         }
+      />
+
+      {/* Modal - Delete *Showcase */}
+      <ModalDel
+        modalDelID="modal-delete"
+        modalDelTitle="(Admin) Teams"
+        modalDelContent={delInfo}
+        modalDelPath="teams"
       />
     </main>
   );

@@ -186,7 +186,7 @@ const A_Home = () => {
 
                   <section className="showcase-container row m-0">
                     {showcase.map((showcaseItem, idx) => (
-                      <section key={idx} className="col-lg-4">
+                      <section key={idx} className="col-md-6">
                         <section className="showcase-card">
                           <img
                             src={showcaseItem.image}
