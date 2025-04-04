@@ -23,8 +23,8 @@ import A_Teams from "./pages/A_Team";
 
 const A_Main = ({ showComp, setSelectComp1 }) => {
   const [selectComp, setSelectComp] = useState("Admin-Home");
-  console.log("selectComp: ", selectComp);
-  console.log("showComp: ", showComp);
+  // console.log("selectComp: ", selectComp);
+  // console.log("showComp: ", showComp);
 
   useEffect(() => {
     if (showComp) {

@@ -196,8 +196,12 @@
                 border: 1px solid var.$btn_success1;
                 box-shadow: 0 0 3px var.$btn_success1;
               }
+
+              &:disabled{
+                background: red;
+              }
             }
-      
+            
             .btn-update {
               color: var.$btn_update1;
               background: var.$btn_update2;

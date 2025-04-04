@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Axios, { all } from "axios";
 // Components
 import Modal from "../../EComponents/Modal";
 
@@ -7,7 +7,9 @@ import J from "../../DAssets/person/j.png";
 import N from "../../DAssets/person/n.png";
 import B from "../../DAssets/person/b.png";
 import P from "../../DAssets/person/p.png";
-import { i } from "framer-motion/client";
+import { img } from "framer-motion/client";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const A_Team = () => {
   const [selectedInfo, setSelectedInfo] = useState([]);
@@ -16,11 +18,11 @@ const A_Team = () => {
       image: J,
       name: "ผู้ช่วยศาสตราจารย์ จิโรจน์ จริตควร",
       position: "หัวหน้าสาขาวิชาวิศวกรรมคอมพิวเตอร์",
-      education: [
+      educations: [
         "ปริญญาโท: M.Eng. (Microelectronics) Asian Institute of Technology, Thailand",
         "ปริญญาตรี: วิศวกรรมศาสตรบัณฑิต (วิศวกรรมไฟฟ้า) มหาวิทยาลัยศรีปทุม",
       ],
-      expertise: [
+      expertises: [
         "Hardware. Digital.& analog circuit.design",
         "IoT (Embedded system)",
         "Robotics and Hardware Interfaces",
@@ -43,20 +45,20 @@ const A_Team = () => {
           position: "ตำแหน่ง: อาจารย์ประจำ (2543 – 2547)",
         },
       ],
-      tel: "0 2579 1111 ต่อ 2197",
-      email: "chirot.ch@spu.ac.th",
-      website: "https://chirotch.wixsite.com/chirot-charitkhuan",
+      tels: "0 2579 1111 ต่อ 2197",
+      emails: "chirot.ch@spu.ac.th",
+      websites: "https://chirotch.wixsite.com/chirot-charitkhuan",
     },
     {
       image: B,
       name: "ดร.สุรชัย ทองแก้ว",
       position: "อาจารย์ประจำ",
-      education: [
+      educations: [
         "ปริญญาเอก: Ph.D. (Communication and Integrated Systems), Tokyo Institute of Technology, Japan",
         "ปริญญาโท: M.E. (Microelectronics), Asian Institute of Technology, Thailand",
         "ปริญญาตรี: B.E. (Computer Engineering), Sripatum University, Thailand",
       ],
-      expertise: [
+      expertises: [
         " IoT Solution",
         "Hardware Programming",
         "Processor design and Computer Architecture",
@@ -78,7 +80,7 @@ const A_Team = () => {
           position: "ผู้ช่วยคณบดีฝ่ายกิจการนักศึกษา (พ.ศ.2549 -2553)",
         },
       ],
-      research: [
+      researchs: [
         "ปฏิภาณ ศรีสวัสดิ์, สุรชัย ทองแก้ว. “อินเทอร์เน็ตประสานสรรพสิ่งควบคุมน้ำ และปุ๋ยในฟาร์มเมล่อนคิโมจิ.”. (2563). รายงานสืบเนื่องจากการประชุมวิชาการระดับชาติและนานาชาติ มหาวิทยาลัยศรีปทุม (Sripatum University Conference 2020). ครั้งที่ 15. มหาวิทยาลัยศรีปทุม.หน้า 1643-1652.",
         "นริศรา จิตต์เที่ยง, สรวีย์ นีรนาถภูวดล, ภาสกร พรสี่, นิมิตร ทักษวิทยาพงศ์, สุรชัย ทองแก้ว. “อุปกรณ์เสริมตรวจจับวัตถุและช่วยเหลือการเดินทางสําหรับผู้พิการทางสายตา.”. (2562). รายงานสืบเนื่องจากการประชุมวิชาการระดับชาติและนานาชาติ มหาวิทยาลัยศรีปทุม (Sripatum University Conference 2019). ครั้งที่ 14. มหาวิทยาลัยศรีปทุม.หน้า 1828-1837.",
         "ยุทธศักดิ์ ฝูงพิลา, ศรัณย์ โนราช, ณัฐนันท์ โมราสุข, ผิน ฉัตรแก้วมณี, สุรชัย ทองแก้ว. “ระบบจัดการเวอร์ชั่นของอุปกรณ์อินเทอร์เน็ตในทุกสรรพสิ่งผ่านบริการคลาวด์.”. (2562). รายงานสืบเนื่องจากการประชุมวิชาการระดับชาติและนานาชาติ มหาวิทยาลัยศรีปทุม (Sripatum University Conference 2019). ครั้งที่ 14. มหาวิทยาลัยศรีปทุม.หน้า 1857-1865.",
@@ -91,19 +93,19 @@ const A_Team = () => {
         "กฤษฎา พรหมมา, ลักษมี เหมนรากร, สุรชัย ทองแก้ว, และจิโรจน์ จริตควร. (2560). อินเตอร์เน็ตทุกสรรพสิ่งสำหรับการควบคุมประสิทธิภาพของยาโดยการตรวจสอบอุณหภูมิ. การประชุมวิชาการระดับชาติและนานาชาติ มหาวิทยาลัยศรีปทุม ครั้งที่ 12 ประจำปี 2560 (SPUCON2017), วันที่ 14 ธันวาคม 2560, หน้า 2226-2236",
         "S. Thongkaew and C. Charitkuan .(2018). IoT for Energy Saving of Split-Type Air Conditioner by Controlling Supply Air and Area Temperature, .22nd International Computer Science and Engineering Conference (ICSEC), pp. 1-4, doi: 10.1109/ICSEC.2018.8712656.",
       ],
-      tel: "0 2579 1111 ต่อ 2212",
-      email: ["surachai.th@spu.ac.th", "surachait@hotmail.com"],
-      website: "https://surachaith.wixsite.com/dr-bird",
+      tels: "0 2579 1111 ต่อ 2212",
+      emails: ["surachai.th@spu.ac.th", "surachait@hotmail.com"],
+      websites: "https://surachaith.wixsite.com/dr-bird",
     },
     {
       image: N,
       name: "อาจารย์นิมิตร ทักษวิทยาพงศ์",
       position: "หัวหน้าสาขาวิชาวิศวกรรมคอมพิวเตอร์",
-      education: [
+      educations: [
         "ปริญญาโท: M.Eng. (Microelectronics and Embedded Systems ) Asian Institute of Technology, Thailand",
         "ปริญญาตรี : วิศวกรรมศาสตรบัณฑิต (วิศวกรรมคอมพิวเตอร์) มหาวิทยาลัยศรีปทุม",
       ],
-      expertise: [
+      expertises: [
         "Internet of Thing (IoT)",
         "Embedded system (hardware/software)",
         "Application development (web/mobile)",
@@ -115,7 +117,7 @@ const A_Team = () => {
             "ตำแหน่ง: อาจารย์ประจำสาขาวิศวกรรมคอมพิวเตอร์ (พ.ศ.2549 – ปัจจุบัน)",
         },
       ],
-      research: [
+      researchs: [
         "นายการันต์ เศรษฐี, นายชนกันต์ อิ่มใจ, นิมิตร ทักษวิทยาพงศ์, ภูริลาภ จุฑาวัชระพล “แอปพลิเคชันดูแลสุขภาพด้วยนาฬิกาอัจฉริยะ” (2563) รายงานสืบเนื่อง (Proceedings) การประชุมวิชาการระดับชาติและนานาชาติ มหาวิทยาลัยศรีปทุม (Sripatum University Conference 2019) ครั้งที่ 15 มหาวิทยาลัยศรีปทุม. หน้า 1585-1595",
         "นพดล ชะนางวัลย์ , ณรงค์ชัย ชาติชาญชัย , นิรวิทธ์ อินดี, นิมิตร ทักษวิทยาพงศ์, ผศ.จิโรจน์ จริตควร “การพัฒนาระบบควบคุมอุณหภูมิอัจฉริยะสําหรับฟาร์มเลี้ยงไก่” (2562) รายงานสืบเนื่อง (Proceedings) การประชุมวิชาการระดับชาติและนานาชาติ มหาวิทยาลัยศรีปทุม (Sripatum University Conference 2019) ครั้งที่ 14 มหาวิทยาลัยศรีปทุม หน้า 1818-1827",
         "นริศรา จิตต์เท่ียง , สรวีย์ นีรนาถภูวดล , ภาสกร พรสี่, นิมิตร ทักษวิทยาพงศ์, ดร.สุรชัย ทองแก้ว “อุปกรณ์เสริมตรวจจับวัตถุและช่วยเหลือการเดินทางสําหรับผู้พิการทางสายตา” (2562) รายงานสืบเนื่อง (Proceedings) การประชุมวิชาการระดับชาติและนานาชาติ มหาวิทยาลัยศรีปทุม (Sripatum University Conference 2019) ครั้งที่ 14 มหาวิทยาลัยศรีปทุม หน้า 1828-1837",
@@ -128,22 +130,22 @@ const A_Team = () => {
         "ณัฐชากร คำยอด, ปริญญา แสนจันทร์, มนัสนันท์ หรั่งยิ้ม, สุรชัย ทองแก้ว, นิมิตร ทักษวิทยาพงศ์ “การวิเคราะห์ความอับชื้นเพื่อเปลี่ยนการใช้งานของผ้าอ้อมสำเร็จรูปสำหรับผู้สูงอายุ” (2559) รายงานสืบเนื่อง (Proceedings) การประชุมวิชาการระดับชาติและนานาชาติ มหาวิทยาลัยศรีปทุม (Sripatum University Conference 2016) ครั้งที่ 11 มหาวิทยาลัยศรีปทุม หน้า 1428-1437",
         "มานพ เกษประดิษฐ์, พิชัย แนวดี, สุรชัย ทองแก้ว, จิโรจน์ จริตควร, นิมิตร ทักษวิทยาพงศ์ “ระบบอินเตอร์เน็ตในทุกสรรพสิ่งสําหรับควบคุมน้ำในนาข้าว” (2559) รายงานสืบเนื่อง (Proceedings) การประชุมวิชาการระดับชาติและนานาชาติ มหาวิทยาลัยศรีปทุม (Sripatum University Conference 2016) ครั้งที่ 11 มหาวิทยาลัยศรีปทุม หน้า 1602-1612",
       ],
-      tel: "0 2579 1111 ต่อ 2212",
-      email: "nimit.tu@spu.ac.th",
-      website: "https://nimittu.wixsite.com/spu-nimit",
+      tels: "0 2579 1111 ต่อ 2212",
+      emails: "nimit.tu@spu.ac.th",
+      websites: "https://nimittu.wixsite.com/spu-nimit",
     },
     {
       image: P,
       name: "อาจารย์ภูริลาภ จุฑาวัชระพล",
       position: "อาจารย์ประจำ",
-      education: [
+      educations: [
         "ปริญญาโท: วิทยาศาสตรมหาบัณฑิต (เทคโนโลยีสารสนเทศ) คณะเทคโนโลยีสารสนเทศ มหาวิทยาลัยศรีปทุม",
         "ปริญญาตรี: วิศวกรรมศาสตรบัณฑิต (วิศวกรรมไฟฟ้า) มหาวิทยาลัยศรีปทุม",
         "ปริญญาตรี: วิทยาศาสตรบัณฑิต (วิทยาการคอมพิวเตอร์) คณะสารสนเทศศาสตร์ มหาวิทยาลัยศรีปทุม",
         "ประกาศนียบัตร: Java Certification",
         "ประกาศนียบัตร: Web 2.0 Certification",
       ],
-      expertise: [
+      expertises: [
         "Programming",
         "Mobile Developer",
         "Web Programming",
@@ -156,9 +158,9 @@ const A_Team = () => {
             "ตำแหน่ง: อาจารย์ประจำสาขาวิชาวิศวกรรมคอมพิวเตอร์ (พ.ศ.2544-ปัจจุบัน)",
         },
       ],
-      tel: "0 2579 1111 ต่อ 2212",
-      email: "purilarp.ch@spu.ac.th",
-      website: "https://purilarpch.wixsite.com/myprofile",
+      tels: "0 2579 1111 ต่อ 2212",
+      emails: "purilarp.ch@spu.ac.th",
+      websites: "https://purilarpch.wixsite.com/myprofile",
     },
   ];
 
@@ -166,14 +168,14 @@ const A_Team = () => {
   const [previewImage, setPreviewImage] = useState();
   const [position, setPosition] = useState("");
   const [name, setName] = useState("");
-  const [education, setEducation] = useState([""]);
-  const [expertise, setExpertise] = useState([""]);
-  const [expLocation, setExpLocation] = useState([""]);
-  const [expPosition, setExpPosition] = useState([""]);
-  const [research, setResearch] = useState([""]);
-  const [tel, setTel] = useState([""]);
-  const [email, setEmail] = useState([""]);
-  const [website, setWebsite] = useState([""]);
+  const [educations, setEducations] = useState([""]);
+  const [expertises, setExpertises] = useState([""]);
+  const [expLocations, setExpLocations] = useState([""]);
+  const [expPositions, setExpPositions] = useState([""]);
+  const [researchs, setResearchs] = useState([""]);
+  const [tels, setTels] = useState([""]);
+  const [emails, setEmails] = useState([""]);
+  const [websites, setWebsites] = useState([""]);
 
   const handleImage = (e) => {
     setImage(e);
@@ -183,125 +185,161 @@ const A_Team = () => {
   // ฟังก์ชันที่ใช้ร่วมกันสำหรับการเปลี่ยนค่าใน array ต่างๆ
   const handleFieldChange = (index, value, type) => {
     const updatedFields =
-      type === "tel"
-        ? [...tel]
-        : type === "email"
-        ? [...email]
-        : type === "website"
-        ? [...website]
-        : type === "education"
-        ? [...education]
-        : type === "expertise"
-        ? [...expertise]
+      type === "tels"
+        ? [...tels]
+        : type === "emails"
+        ? [...emails]
+        : type === "websites"
+        ? [...websites]
+        : type === "educations"
+        ? [...educations]
+        : type === "expertises"
+        ? [...expertises]
         : type === "experience"
         ? [...experience]
-        : type === "research"
-        ? [...research]
-        : type === "expLocation"
-        ? [...expLocation]
-        : type === "expPosition"
-        ? [...expPosition]
+        : type === "researchs"
+        ? [...researchs]
+        : type === "expLocations"
+        ? [...expLocations]
+        : type === "expPositions"
+        ? [...expPositions]
         : [];
 
     updatedFields[index] = value;
-    type === "tel"
-      ? setTel(updatedFields)
-      : type === "email"
-      ? setEmail(updatedFields)
-      : type === "website"
-      ? setWebsite(updatedFields)
-      : type === "education"
-      ? setEducation(updatedFields)
-      : type === "expertise"
-      ? setExpertise(updatedFields)
+    type === "tels"
+      ? setTels(updatedFields)
+      : type === "emails"
+      ? setEmails(updatedFields)
+      : type === "websites"
+      ? setWebsites(updatedFields)
+      : type === "educations"
+      ? setEducations(updatedFields)
+      : type === "expertises"
+      ? setExpertises(updatedFields)
       : type === "experience"
       ? setExperience(updatedFields)
-      : type === "research"
-      ? setResearch(updatedFields)
-      : type === "expLocation"
-      ? setExpLocation(updatedFields)
-      : type === "expPosition"
-      ? setExpPosition(updatedFields)
+      : type === "researchs"
+      ? setResearchs(updatedFields)
+      : type === "expLocations"
+      ? setExpLocations(updatedFields)
+      : type === "expPositions"
+      ? setExpPositions(updatedFields)
       : null;
   };
 
   // ฟังก์ชันที่ใช้ร่วมกันสำหรับการเพิ่มค่าใน array ต่างๆ
   const handleAddField = (type) => {
-    type === "tel"
-      ? setTel([...tel, ""])
-      : type === "email"
-      ? setEmail([...email, ""])
-      : type === "website"
-      ? setWebsite([...website, ""])
-      : type === "education"
-      ? setEducation([...education, ""])
-      : type === "expertise"
-      ? setExpertise([...expertise, ""])
-      : type === "research"
-      ? setResearch([...research, ""])
-      : type === "expLocation"
-      ? setExpLocation([...expLocation, ""])
-      : type === "expPosition"
-      ? setExpPosition([...expPosition, ""])
+    type === "tels"
+      ? setTels([...tels, ""])
+      : type === "emails"
+      ? setEmails([...emails, ""])
+      : type === "websites"
+      ? setWebsites([...websites, ""])
+      : type === "educations"
+      ? setEducations([...educations, ""])
+      : type === "expertises"
+      ? setExpertises([...expertises, ""])
+      : type === "researchs"
+      ? setResearchs([...researchs, ""])
+      : type === "expLocations"
+      ? setExpLocations([...expLocations, ""])
+      : type === "expPositions"
+      ? setExpPositions([...expPositions, ""])
       : null;
   };
 
   // ฟังก์ชันที่ใช้ร่วมกันสำหรับการลบค่าใน array ต่างๆ
   const handleDeleteField = (index, type) => {
     const updatedFields =
-      type === "tel"
-        ? [...tel]
-        : type === "email"
-        ? [...email]
-        : type === "website"
-        ? [...website]
-        : type === "education"
-        ? [...education]
-        : type === "expertise"
-        ? [...expertise]
-        : type === "research"
-        ? [...research]
-        : type === "expLocation"
-        ? [...expLocation]
-        : type === "expPosition"
-        ? [...expPosition]
+      type === "tels"
+        ? [...tels]
+        : type === "emails"
+        ? [...emails]
+        : type === "websites"
+        ? [...websites]
+        : type === "educations"
+        ? [...educations]
+        : type === "expertises"
+        ? [...expertises]
+        : type === "researchs"
+        ? [...researchs]
+        : type === "expLocations"
+        ? [...expLocations]
+        : type === "expPositions"
+        ? [...expPositions]
         : [];
 
     updatedFields.splice(index, 1);
-    type === "tel"
-      ? setTel(updatedFields)
-      : type === "email"
-      ? setEmail(updatedFields)
-      : type === "website"
-      ? setWebsite(updatedFields)
-      : type === "education"
-      ? setEducation(updatedFields)
-      : type === "expertise"
-      ? setExpertise(updatedFields)
-      : type === "research"
-      ? setResearch(updatedFields)
-      : type === "expLocation"
-      ? setExpLocation(updatedFields)
-      : type === "expPosition"
-      ? setExpPosition(updatedFields)
+    type === "tels"
+      ? setTels(updatedFields)
+      : type === "emails"
+      ? setEmails(updatedFields)
+      : type === "websites"
+      ? setWebsites(updatedFields)
+      : type === "educations"
+      ? setEducations(updatedFields)
+      : type === "expertises"
+      ? setExpertises(updatedFields)
+      : type === "researchs"
+      ? setResearchs(updatedFields)
+      : type === "expLocations"
+      ? setExpLocations(updatedFields)
+      : type === "expPositions"
+      ? setExpPositions(updatedFields)
       : null;
   };
+
+  // Post Teams
+  const handlePostTeam = async () => {
+    try {
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("name", name);
+        formData.append("position", position);
+        formData.append("education", educations.map(edu => edu.trim()).join(","));
+        formData.append("expertise", expertises.map(expt => expt.trim()).join(","));
+        formData.append("expLocation", expLocations.map(expL => expL.trim()).join(","));
+        formData.append("expPosition", expPositions.map(expP => expP.trim()).join(","));
+        formData.append("research", researchs.map(res => res.trim()).join(","));
+        formData.append("tel", tels.map(t => t.trim()).join(","));
+        formData.append("email", emails.map(e => e.trim()).join(","));
+        formData.append("website", websites.map(w => w.trim()).join(","));
+        
+  
+        const res = await Axios.post(`${API_URL}/teams`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: true,
+        });
+  
+        if (res.status === 200) {
+          alert(`Add New *Team Member Succesful.`);
+          location.reload();
+        } else {
+          alert(`Error to get *Team Member, for this id: ${id}`);
+          location.reload();
+        }
+      } catch {
+        alert(`Internal server ${err}`);
+      }
+  }
+
 
   // Handle Cancel Button
   const handleCancel = () => {
     document.getElementById("image").value = null;
     document.getElementById("position").value = null;
     document.getElementById("name").value = null;
-    setEducation([""]);
-    setExpertise([""]);
-    setExpLocation([""]);
-    setExpPosition([""]);
-    setResearch([""]);
-    setTel([""]);
-    setEmail([""]);
-    setWebsite([""]);
+    setEducations([""]);
+    setExpertises([""]);
+    setExpLocations([""]);
+    setExpPositions([""]);
+    setResearchs([""]);
+    setTels([""]);
+    setEmails([""]);
+    setWebsites([""]);
     setPreviewImage(null);
-  }
+  };
+  
 
   return (
     <main className="a-team-container">
@@ -408,10 +446,10 @@ const A_Team = () => {
                   />
                 </div>
 
-                {/* Tel */}
+                {/* tels */}
                 <div className="d-flex flex-column">
-                  <label className="form-label mb-2">* Tel</label>
-                  {tel.map((telValue, index) => (
+                  <label className="form-label mb-2">* tels</label>
+                  {tels.map((telsValue, index) => (
                     <div
                       className="input-box d-flex align-items-start gap-2"
                       key={index}
@@ -419,12 +457,12 @@ const A_Team = () => {
                       <div className="flex-grow-1">
                         <input
                           type="text"
-                          id={`tel-${index}`}
+                          id={`tels-${index}`}
                           placeholder="ex. 0 2579 1111 ต่อ 2212"
                           className="form-control mb-3"
-                          value={telValue}
+                          value={telsValue}
                           onChange={(e) =>
-                            handleFieldChange(index, e.target.value, "tel")
+                            handleFieldChange(index, e.target.value, "tels")
                           }
                         />
                       </div>
@@ -432,7 +470,7 @@ const A_Team = () => {
                         <button
                           type="button"
                           className="btn btn-danger mb-3"
-                          onClick={() => handleDeleteField(index, "tel")}
+                          onClick={() => handleDeleteField(index, "tels")}
                         >
                           Delete
                         </button>
@@ -442,30 +480,30 @@ const A_Team = () => {
 
                   <button
                     type="button"
-                    onClick={() => handleAddField("tel")}
+                    onClick={() => handleAddField("tels")}
                     className="btn btn-secondary mb-4"
                   >
-                    Add Tel.
+                    Add tels.
                   </button>
                 </div>
 
-                {/* Email */}
+                {/* emails */}
                 <div className="d-flex flex-column">
-                  <label className="form-label mb-2">* Email</label>
-                  {email.map((emailValue, index) => (
+                  <label className="form-label mb-2">* emails</label>
+                  {emails.map((emailsValue, index) => (
                     <div
                       className="input-box d-flex align-items-start gap-2"
                       key={index}
                     >
                       <div className="flex-grow-1">
                         <input
-                          type="email"
-                          id={`email-${index}`}
+                          type="emails"
+                          id={`emails-${index}`}
                           placeholder="ex. nimit.tu@spu.ac.th"
                           className="form-control mb-3"
-                          value={emailValue}
+                          value={emailsValue}
                           onChange={(e) =>
-                            handleFieldChange(index, e.target.value, "email")
+                            handleFieldChange(index, e.target.value, "emails")
                           }
                         />
                       </div>
@@ -473,7 +511,7 @@ const A_Team = () => {
                         <button
                           type="button"
                           className="btn btn-danger mb-3"
-                          onClick={() => handleDeleteField(index, "email")}
+                          onClick={() => handleDeleteField(index, "emails")}
                         >
                           Delete
                         </button>
@@ -483,17 +521,17 @@ const A_Team = () => {
 
                   <button
                     type="button"
-                    onClick={() => handleAddField("email")}
+                    onClick={() => handleAddField("emails")}
                     className="btn btn-secondary mb-4"
                   >
-                    Add Email.
+                    Add emails.
                   </button>
                 </div>
 
-                {/* Website */}
+                {/* websites */}
                 <div className="d-flex flex-column">
-                  <label className="form-label mb-2">* Website</label>
-                  {website.map((websiteValue, index) => (
+                  <label className="form-label mb-2">* websites</label>
+                  {websites.map((websitesValue, index) => (
                     <div
                       className="input-box d-flex align-items-start gap-2"
                       key={index}
@@ -501,12 +539,12 @@ const A_Team = () => {
                       <div className="flex-grow-1">
                         <input
                           type="text"
-                          id={`website-${index}`}
+                          id={`websites-${index}`}
                           placeholder="ex. https://nimittu.wixsite.com/spu-nimit"
                           className="form-control mb-3"
-                          value={websiteValue}
+                          value={websitesValue}
                           onChange={(e) =>
-                            handleFieldChange(index, e.target.value, "website")
+                            handleFieldChange(index, e.target.value, "websites")
                           }
                         />
                       </div>
@@ -514,7 +552,7 @@ const A_Team = () => {
                         <button
                           type="button"
                           className="btn btn-danger mb-3"
-                          onClick={() => handleDeleteField(index, "website")}
+                          onClick={() => handleDeleteField(index, "websites")}
                         >
                           Delete
                         </button>
@@ -524,7 +562,7 @@ const A_Team = () => {
 
                   <button
                     type="button"
-                    onClick={() => handleAddField("website")}
+                    onClick={() => handleAddField("websites")}
                     className="btn btn-secondary mb-4"
                   >
                     Add Web.
@@ -534,10 +572,10 @@ const A_Team = () => {
 
               {/* Right Side */}
               <section className="input-container col-md-6">
-                {/* Education */}
+                {/* educations */}
                 <div className="d-flex flex-column">
-                  <label className="form-label mb-2">* Education</label>
-                  {education.map((educationValue, index) => (
+                  <label className="form-label mb-2">* educations</label>
+                  {educations.map((educationsValue, index) => (
                     <div
                       className="input-box d-flex align-items-start gap-2"
                       key={index}
@@ -545,15 +583,15 @@ const A_Team = () => {
                       <div className="flex-grow-1">
                         <textarea
                           type="text"
-                          id={`education-${index}`}
+                          id={`educations-${index}`}
                           placeholder="ex. ปริญญาตรี: วิศวกรรมศาสตรบัณฑิต (วิศวกรรมไฟฟ้า) มหาวิทยาลัยศรีปทุม"
                           className="form-control mb-3"
-                          value={educationValue}
+                          value={educationsValue}
                           onChange={(e) =>
                             handleFieldChange(
                               index,
                               e.target.value,
-                              "education"
+                              "educations"
                             )
                           }
                         ></textarea>
@@ -562,7 +600,7 @@ const A_Team = () => {
                         <button
                           type="button"
                           className="btn btn-danger mb-3"
-                          onClick={() => handleDeleteField(index, "education")}
+                          onClick={() => handleDeleteField(index, "educations")}
                         >
                           Delete
                         </button>
@@ -572,17 +610,17 @@ const A_Team = () => {
 
                   <button
                     type="button"
-                    onClick={() => handleAddField("education")}
+                    onClick={() => handleAddField("educations")}
                     className="btn btn-secondary mb-4"
                   >
                     Add Edu.
                   </button>
                 </div>
 
-                {/* Expertise */}
+                {/* expertises */}
                 <div className="d-flex flex-column">
-                  <label className="form-label mb-2">* Expertise</label>
-                  {expertise.map((expertiseValue, index) => (
+                  <label className="form-label mb-2">* expertises</label>
+                  {expertises.map((expertisesValue, index) => (
                     <div
                       className="input-box d-flex align-items-start gap-2"
                       key={index}
@@ -590,15 +628,15 @@ const A_Team = () => {
                       <div className="flex-grow-1">
                         <input
                           type="text"
-                          id={`expertise-${index}`}
+                          id={`expertises-${index}`}
                           placeholder="ex. Internet of Thing (IoT)"
                           className="form-control mb-3"
-                          value={expertiseValue}
+                          value={expertisesValue}
                           onChange={(e) =>
                             handleFieldChange(
                               index,
                               e.target.value,
-                              "expertise"
+                              "expertises"
                             )
                           }
                         />
@@ -607,7 +645,7 @@ const A_Team = () => {
                         <button
                           type="button"
                           className="btn btn-danger mb-3"
-                          onClick={() => handleDeleteField(index, "expertise")}
+                          onClick={() => handleDeleteField(index, "expertises")}
                         >
                           Delete
                         </button>
@@ -617,7 +655,7 @@ const A_Team = () => {
 
                   <button
                     type="button"
-                    onClick={() => handleAddField("expertise")}
+                    onClick={() => handleAddField("expertises")}
                     className="btn btn-secondary mb-4"
                   >
                     Add Expt.
@@ -631,7 +669,7 @@ const A_Team = () => {
                     <label className="form-label mb-2">
                       * Location / Position
                     </label>
-                    {expLocation.map((expLocationValue, index) => (
+                    {expLocations.map((expLocationsValue, index) => (
                       <div
                         className="input-box d-flex flex-column gap-2"
                         key={index}
@@ -640,15 +678,15 @@ const A_Team = () => {
                         <div className="mb-2">
                           <input
                             type="text"
-                            id={`expLocation-${index}`}
+                            id={`expLocations-${index}`}
                             placeholder="ex. Location"
                             className="form-control"
-                            value={expLocationValue}
+                            value={expLocationsValue}
                             onChange={(e) =>
                               handleFieldChange(
                                 index,
                                 e.target.value,
-                                "expLocation"
+                                "expLocations"
                               )
                             }
                           />
@@ -664,15 +702,15 @@ const A_Team = () => {
                             {/* Position Input */}
                             <input
                               type="text"
-                              id={`expPosition-${index}`}
+                              id={`expPositions-${index}`}
                               placeholder="ex. Position"
                               className="form-control"
-                              value={expPosition[index]}
+                              value={expPositions[index]}
                               onChange={(e) =>
                                 handleFieldChange(
                                   index,
                                   e.target.value,
-                                  "expPosition"
+                                  "expPositions"
                                 )
                               }
                             />
@@ -685,8 +723,8 @@ const A_Team = () => {
                                   type="button"
                                   className="btn btn-danger mb-3"
                                   onClick={() => {
-                                    handleDeleteField(index, "expLocation");
-                                    handleDeleteField(index, "expPosition");
+                                    handleDeleteField(index, "expLocations");
+                                    handleDeleteField(index, "expPositions");
                                   }}
                                 >
                                   Delete
@@ -700,8 +738,8 @@ const A_Team = () => {
                     <button
                       type="button"
                       onClick={() => {
-                        handleAddField("expLocation");
-                        handleAddField("expPosition");
+                        handleAddField("expLocations");
+                        handleAddField("expPositions");
                       }}
                       className="btn btn-secondary mb-4"
                     >
@@ -710,10 +748,10 @@ const A_Team = () => {
                   </div>
                 </div>
 
-                {/* Research */}
+                {/* researchs */}
                 <div className="d-flex flex-column">
-                  <label className="form-label mb-2">* Research</label>
-                  {research.map((researchValue, index) => (
+                  <label className="form-label mb-2">* researchs</label>
+                  {researchs.map((researchsValue, index) => (
                     <div
                       className="input-box d-flex align-items-start gap-2"
                       key={index}
@@ -721,12 +759,12 @@ const A_Team = () => {
                       <div className="flex-grow-1">
                         <textarea
                           type="text"
-                          id={`research-${index}`}
+                          id={`researchs-${index}`}
                           placeholder="ex. นายการันต์ เศรษฐี, นายชนกันต์ อิ่มใจ, นิมิตร ทักษวิทยาพงศ์, ภูริลาภ จุฑาวัชระพล “แอปพลิเคชันดูแลสุขภาพด้วยนาฬิกาอัจฉริยะ” (2563) รายงานสืบเนื่อง (Proceedings) การประชุมวิชาการระดับชาติและนานาชาติ มหาวิทยาลัยศรีปทุม (Sripatum University Conference 2019) ครั้งที่ 15 มหาวิทยาลัยศรีปทุม. หน้า 1585-1595"
                           className="form-control mb-3"
-                          value={researchValue}
+                          value={researchsValue}
                           onChange={(e) =>
-                            handleFieldChange(index, e.target.value, "research")
+                            handleFieldChange(index, e.target.value, "researchs")
                           }
                         ></textarea>
                       </div>
@@ -734,7 +772,7 @@ const A_Team = () => {
                         <button
                           type="button"
                           className="btn btn-danger mb-3"
-                          onClick={() => handleDeleteField(index, "research")}
+                          onClick={() => handleDeleteField(index, "researchs")}
                         >
                           Delete
                         </button>
@@ -744,7 +782,7 @@ const A_Team = () => {
 
                   <button
                     type="button"
-                    onClick={() => handleAddField("research")}
+                    onClick={() => handleAddField("researchs")}
                     className="btn btn-secondary mb-4"
                   >
                     Add Res.
@@ -765,7 +803,21 @@ const A_Team = () => {
                     <button 
                         type="button"
                         className="btn btn-add"
-
+                        onClick={handlePostTeam}
+                        disabled={
+                            !image ||
+                            position.trim() === "" ||
+                            name.trim() === "" ||
+                            educations.some((e) => e.trim() === "") ||
+                            expertises.some((e) => e.trim() === "") ||
+                            expLocations.some((e) => e.trim() === "") ||
+                            expPositions.some((e) => e.trim() === "") ||
+                            researchs.some((e) => e.trim() === "") ||
+                            tels.some((e) => e.trim() === "") ||
+                            emails.some((e) => e.trim() === "") ||
+                            websites.some((e) => e.trim() === "")
+                          }
+                          
                     >
                         Add New
                     </button>
@@ -799,21 +851,21 @@ const A_Team = () => {
                 <h6 className="name">{selectedInfo.name}</h6>
 
                 <h6 className="edu-topic">วุฒิการศึกษา: </h6>
-                {Array.isArray(selectedInfo.education) ? (
-                  selectedInfo.education.map((edu, idx) => (
+                {Array.isArray(selectedInfo.educations) ? (
+                  selectedInfo.educations.map((edu, idx) => (
                     <p key={idx} className="edu">
                       {edu}
                     </p>
                   ))
                 ) : (
-                  <p className="edu">{selectedInfo.education}</p>
+                  <p className="edu">{selectedInfo.educations}</p>
                 )}
 
-                {Array.isArray(selectedInfo.expertise) &&
-                  selectedInfo.expertise.length !== 0 && (
+                {Array.isArray(selectedInfo.expertises) &&
+                  selectedInfo.expertises.length !== 0 && (
                     <ol className="expt-list">
                       <h6 className="expt-topic">ความถนัด:</h6>
-                      {selectedInfo.expertise.map((expt, idx) => (
+                      {selectedInfo.expertises.map((expt, idx) => (
                         <li key={idx} className="expt">
                           {expt}
                         </li>
@@ -832,11 +884,11 @@ const A_Team = () => {
                       ))}
                     </>
                   )}
-                {Array.isArray(selectedInfo.research) &&
-                  selectedInfo.research.length !== 0 && (
+                {Array.isArray(selectedInfo.researchs) &&
+                  selectedInfo.researchs.length !== 0 && (
                     <>
                       <h6 className="res-topic">ผลงานวิจัย:</h6>
-                      {selectedInfo.research.map((res, idx) => (
+                      {selectedInfo.researchs.map((res, idx) => (
                         <p key={idx} className="res">
                           {res}
                         </p>
@@ -844,22 +896,22 @@ const A_Team = () => {
                     </>
                   )}
 
-                <p className="tel">Tel: {selectedInfo.tel}</p>
-                {Array.isArray(selectedInfo.email) &&
-                selectedInfo.email.length > 1 ? (
+                <p className="tels">tels: {selectedInfo.tels}</p>
+                {Array.isArray(selectedInfo.emails) &&
+                selectedInfo.emails.length > 1 ? (
                   <>
-                    <p className="email">Email: {selectedInfo.email[0]}</p>
-                    <p className="email">Email: {selectedInfo.email[1]}</p>
+                    <p className="emails">emails: {selectedInfo.emails[0]}</p>
+                    <p className="emails">emails: {selectedInfo.emails[1]}</p>
                   </>
                 ) : (
-                  <p className="email">
-                    Email:{" "}
-                    {Array.isArray(selectedInfo.email)
-                      ? selectedInfo.email[0]
-                      : selectedInfo.email}
+                  <p className="emails">
+                    emails:{" "}
+                    {Array.isArray(selectedInfo.emails)
+                      ? selectedInfo.emails[0]
+                      : selectedInfo.emails}
                   </p>
                 )}
-                <p className="website">Website: {selectedInfo.website}</p>
+                <p className="websites">websites: {selectedInfo.websites}</p>
               </section>
             </article>
           </article>

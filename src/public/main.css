@@ -1302,6 +1302,9 @@
   border: 1px solid #13B35D;
   box-shadow: 0 0 3px #13B35D;
 }
+.a-team-container .form .form-content .btn-container .btn-add:disabled {
+  background: red;
+}
 .a-team-container .form .form-content .btn-container .btn-update {
   color: #0093FE;
   background: #E7F3FF;
