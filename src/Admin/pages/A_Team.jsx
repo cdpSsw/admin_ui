@@ -287,6 +287,22 @@ const A_Team = () => {
       : null;
   };
 
+  // Handle Cancel Button
+  const handleCancel = () => {
+    document.getElementById("image").value = null;
+    document.getElementById("position").value = null;
+    document.getElementById("name").value = null;
+    setEducation([""]);
+    setExpertise([""]);
+    setExpLocation([""]);
+    setExpPosition([""]);
+    setResearch([""]);
+    setTel([""]);
+    setEmail([""]);
+    setWebsite([""]);
+    setPreviewImage(null);
+  }
+
   return (
     <main className="a-team-container">
       <article className="top-container">
@@ -305,7 +321,7 @@ const A_Team = () => {
 
       <article className="content-container row m-0">
         {teams.map((team, idx) => (
-          <section key={idx} className="col-md-3">
+          <section key={idx} className="col-sm-6 col-md-3">
             <section className="content-card">
               <img src={team.image} alt={team.name} className="content-img" />
 
@@ -316,12 +332,12 @@ const A_Team = () => {
                 <button
                   type="button"
                   data-bs-toggle="modal"
-                  data-bs-target="#modal-edit"
+                  data-bs-target="#modal-preview"
                   className="btn btn-edit"
                   onClick={() => setSelectedInfo(team)}
                 >
-                  <i className="bi bi-pencil-square"></i>
-                  Edit Information
+                  <i className="bi bi-eye"></i>
+                  Preview
                 </button>
               </section>
             </section>
@@ -530,7 +546,7 @@ const A_Team = () => {
                         <textarea
                           type="text"
                           id={`education-${index}`}
-                          placeholder="ปริญญาตรี: วิศวกรรมศาสตรบัณฑิต (วิศวกรรมไฟฟ้า) มหาวิทยาลัยศรีปทุม"
+                          placeholder="ex. ปริญญาตรี: วิศวกรรมศาสตรบัณฑิต (วิศวกรรมไฟฟ้า) มหาวิทยาลัยศรีปทุม"
                           className="form-control mb-3"
                           value={educationValue}
                           onChange={(e) =>
@@ -610,7 +626,7 @@ const A_Team = () => {
 
                 {/* Experience - Location / Position */}
                 <div>
-                  <p className="topic">Experience</p>
+                  <p className="topic text-start">Experience</p>
                   <div className="d-flex flex-column">
                     <label className="form-label mb-2">
                       * Location / Position
@@ -639,8 +655,12 @@ const A_Team = () => {
                         </div>
 
                         {/* Position Input */}
-                        <div className="exp-position-box d-flex row ">
-                          <div className={`mb-2 ${index > 0 ? "col-md-9" : "col-md-12"}`}>
+                        <div className="exp-position-box d-flex row">
+                          <div
+                            className={`mb-2 ${
+                              index > 0 ? "col-md-9" : "col-md-12"
+                            }`}
+                          >
                             {/* Position Input */}
                             <input
                               type="text"
@@ -658,10 +678,9 @@ const A_Team = () => {
                             />
                           </div>
 
-                          <div className="col-md-2">
                             {/* Delete Button */}
                             {index > 0 && (
-                              <div className="d-flex justify-content-start">
+                              <div className="btn-del-container col-md-3">
                                 <button
                                   type="button"
                                   className="btn btn-danger mb-3"
@@ -674,7 +693,6 @@ const A_Team = () => {
                                 </button>
                               </div>
                             )}
-                          </div>
                         </div>
                       </div>
                     ))}
@@ -732,22 +750,43 @@ const A_Team = () => {
                     Add Res.
                   </button>
                 </div>
+                <div className="hr"></div>
+
+                {/* Button */}
+                <section className="btn-container">
+                    <button 
+                        type="button"
+                        className="btn btn-cancel"
+                        data-bs-dismiss="modal"
+                        onClick={handleCancel}
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        type="button"
+                        className="btn btn-add"
+
+                    >
+                        Add New
+                    </button>
+                </section>
               </section>
             </article>
           </form>
         }
       />
-      {/* Modal - Edit Info */}
+
+      {/* Modal - Preview Info */}
       <Modal
-        modalID="modal-edit"
-        modalHeaderStyle="form-topic-container"
-        modalTitleStyle="form-topic"
+        modalID="modal-preview"
+        modalHeaderStyle="preview-topic-container"
+        modalTitleStyle="preview-topic"
         modalTitle={"Information"}
         modalFooterStyle="d-none"
         modalSize="modal-lg"
         modalBodyContent={
-          <form className="form">
-            <article className="form-content row m-0">
+          <article className="preview-info-container">
+            <article className="preview-content row m-0">
               <section className="col-md-4">
                 <img
                   src={selectedInfo.image}
@@ -823,7 +862,7 @@ const A_Team = () => {
                 <p className="website">Website: {selectedInfo.website}</p>
               </section>
             </article>
-          </form>
+          </article>
         }
       />
     </main>
