@@ -1,0 +1,158 @@
+@use "../../var";
+
+.a-team-container {
+  width: 100%;
+  // background: saddlebrown;
+  min-height: 100vh;
+  height: auto;
+  padding: 2vw 8vw;
+
+  .top-container {
+    display: flex;
+    justify-content: space-between;
+
+    .add-new-container {
+      @include var.center-content;
+
+      .btn {
+        border: 1px solid var.$topic-headers;
+        border-radius: 8px;
+        padding: 8px 16px;
+        transition: all 0.3s ease-out;
+      }
+
+      .btn-add-new {
+        background: none;
+        margin-right: 8px;
+
+        &:hover {
+          color: var.$white;
+          background: var.$topic-headers;
+          box-shadow: 0 0 3px var.$topic-headers;
+        }
+      }
+    }
+  }
+
+  .content-container {
+    .content-card {
+      background: var.$black;
+      height: 600px;
+      border-radius: 16px;
+
+      .content-img {
+        width: 100%;
+        object-fit: cover;
+        object-position: top;
+        aspect-ratio: 3 / 4.5;
+        border-radius: 16px 16px 0 0;
+      }
+
+      .text-container {
+        padding: 24px 16px;
+
+        .position,
+        .name {
+          margin: 0;
+        }
+
+        .position {
+          font-size: 0.8rem;
+          color: var.$dim_white;
+        }
+
+        .name {
+          font-size: 1rem;
+          color: var.$white;
+        }
+
+        .hr {
+          width: 50%;
+          height: 0.5px;
+          background: var.$light-grey;
+          margin: 16px 0;
+        }
+
+        .btn.btn-edit {
+          position: relative;
+          color: var.$light-grey;
+          background: none;
+          padding: 0;
+          transition: all 0.3s ease-out;
+
+          i {
+            margin-right: 8px;
+          }
+
+          &:focus {
+            border: none;
+          }
+
+          &::before {
+            position: absolute;
+            content: "";
+            width: 0;
+            height: 1px;
+            left: 25px;
+            bottom: 0;
+            transition: all 0.3s ease-out;
+          }
+
+          &:hover {
+            color: red;
+
+            &::before {
+              width: 85%;
+              // left: 0;
+              background: red;
+            }
+          }
+        }
+      }
+    }
+  }
+  .form-topic-container {
+
+    .form-topic {
+      padding: 0 16px;
+      color: var.$topic-headers;
+      text-align: center;
+      font-style: italic;
+      margin: 0;
+    }
+  }
+
+  .form {
+    .form-content {
+      .content-img {
+        width: 100%;
+        object-fit: cover;
+        object-position: top;
+      }
+      .position {
+        color: var.$light-grey;
+        margin: 0;
+      }
+      .name {
+        color: var.$topic-headers;
+        font-size: 32px;
+        margin-bottom: 24px;
+      }
+
+      .edu-topic,
+      .expt-topic,
+      .exp-topic,
+      .res-topic {
+        color: red;
+      }
+
+      .expt-list {
+        padding: 0;
+
+        .expt {
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+}

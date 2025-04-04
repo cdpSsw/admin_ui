@@ -10,9 +10,9 @@ import A_Main from './Admin/A_Main';
 import Client_Main from './Client/User_Main';
 
 const router = createHashRouter([
-  { path: '/', element: <A_Main /> },
-  // { path: '/Admin_Dashboard', element: <A_Main /> },
-  // { path: '/', element: <Client_Main /> },
+  // { path: '/', element: <A_Main /> },
+  { path: '/Admin_Dashboard', element: <A_Main /> },
+  { path: '/', element: <Client_Main /> },
 ]);
 
 const App = () => {

@@ -1143,6 +1143,133 @@
   box-shadow: 0 0 3px #0093FE;
 }
 
+.a-team-container {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  padding: 2vw 8vw;
+}
+.a-team-container .top-container {
+  display: flex;
+  justify-content: space-between;
+}
+.a-team-container .top-container .add-new-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.a-team-container .top-container .add-new-container .btn {
+  border: 1px solid #020202;
+  border-radius: 8px;
+  padding: 8px 16px;
+  transition: all 0.3s ease-out;
+}
+.a-team-container .top-container .add-new-container .btn-add-new {
+  background: none;
+  margin-right: 8px;
+}
+.a-team-container .top-container .add-new-container .btn-add-new:hover {
+  color: #fff;
+  background: #020202;
+  box-shadow: 0 0 3px #020202;
+}
+.a-team-container .content-container .content-card {
+  background: #020202;
+  height: 600px;
+  border-radius: 16px;
+}
+.a-team-container .content-container .content-card .content-img {
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+  aspect-ratio: 3/4.5;
+  border-radius: 16px 16px 0 0;
+}
+.a-team-container .content-container .content-card .text-container {
+  padding: 24px 16px;
+}
+.a-team-container .content-container .content-card .text-container .position,
+.a-team-container .content-container .content-card .text-container .name {
+  margin: 0;
+}
+.a-team-container .content-container .content-card .text-container .position {
+  font-size: 0.8rem;
+  color: #D2D2D2;
+}
+.a-team-container .content-container .content-card .text-container .name {
+  font-size: 1rem;
+  color: #fff;
+}
+.a-team-container .content-container .content-card .text-container .hr {
+  width: 50%;
+  height: 0.5px;
+  background: #979797;
+  margin: 16px 0;
+}
+.a-team-container .content-container .content-card .text-container .btn.btn-edit {
+  position: relative;
+  color: #979797;
+  background: none;
+  padding: 0;
+  transition: all 0.3s ease-out;
+}
+.a-team-container .content-container .content-card .text-container .btn.btn-edit i {
+  margin-right: 8px;
+}
+.a-team-container .content-container .content-card .text-container .btn.btn-edit:focus {
+  border: none;
+}
+.a-team-container .content-container .content-card .text-container .btn.btn-edit::before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 1px;
+  left: 25px;
+  bottom: 0;
+  transition: all 0.3s ease-out;
+}
+.a-team-container .content-container .content-card .text-container .btn.btn-edit:hover {
+  color: red;
+}
+.a-team-container .content-container .content-card .text-container .btn.btn-edit:hover::before {
+  width: 85%;
+  background: red;
+}
+.a-team-container .form-topic-container .form-topic {
+  padding: 0 16px;
+  color: #020202;
+  text-align: center;
+  font-style: italic;
+  margin: 0;
+}
+.a-team-container .form .form-content .content-img {
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.a-team-container .form .form-content .position {
+  color: #979797;
+  margin: 0;
+}
+.a-team-container .form .form-content .name {
+  color: #020202;
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+.a-team-container .form .form-content .edu-topic,
+.a-team-container .form .form-content .expt-topic,
+.a-team-container .form .form-content .exp-topic,
+.a-team-container .form .form-content .res-topic {
+  color: red;
+}
+.a-team-container .form .form-content .expt-list {
+  padding: 0;
+}
+.a-team-container .form .form-content .expt-list .expt {
+  margin-left: 16px;
+}
+
 .user-main-container {
   width: 100%;
   height: auto;
