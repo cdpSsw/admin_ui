@@ -37,8 +37,9 @@
   .content-container {
     .content-card {
       background: var.$black;
-      height: 600px;
+    //   height: 600px;
       border-radius: 16px;
+      margin: 16px 0;
 
       .content-img {
         width: 100%;

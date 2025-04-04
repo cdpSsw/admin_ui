@@ -1176,8 +1176,8 @@
 }
 .a-team-container .content-container .content-card {
   background: #020202;
-  height: 600px;
   border-radius: 16px;
+  margin: 16px 0;
 }
 .a-team-container .content-container .content-card .content-img {
   width: 100%;
